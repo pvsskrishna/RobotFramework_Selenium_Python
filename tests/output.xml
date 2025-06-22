@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3 (Python 3.13.2 on win32)" generated="2025-06-20T10:32:29.205934" rpa="false" schemaversion="5">
+<suite id="s1" name="testDemo2" source="C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo2.robot">
+<test id="s1-t1" name="Select the Form and navigate to child window" line="28">
+<kw name="open the browser with mortgage payment url" owner="resource" type="SETUP">
+<kw name="Create Webdriver" owner="SeleniumLibrary">
+<msg time="2025-06-20T10:32:29.771294" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<arg>Chrome</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<status status="PASS" start="2025-06-20T10:32:29.771114" elapsed="1.505595"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-06-20T10:32:31.277776" level="INFO">Opening url 'https://rahulshettyacademy.com/loginpagePractise/'</msg>
+<arg>${url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-06-20T10:32:31.277312" elapsed="0.444742"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-06-20T10:32:31.722514" elapsed="0.050787"/>
+</kw>
+<status status="PASS" start="2025-06-20T10:32:29.770211" elapsed="2.003588"/>
+</kw>
+<kw name="Fill the Login Details and Login Form">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-06-20T10:32:31.776917" level="INFO">Typing text 'rahulshettyacademy' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>rahulshettyacademy</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-20T10:32:31.775460" elapsed="0.328766"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-06-20T10:32:32.105896" level="INFO">Typing password into text field 'password'.</msg>
+<msg time="2025-06-20T10:32:32.179895" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>password</arg>
+<arg>learning</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-20T10:32:32.105257" elapsed="0.244686"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-20T10:32:32.350491" level="INFO">Clicking button 'css:input[value='user']'.</msg>
+<arg>css:input[value='user']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-20T10:32:32.350201" elapsed="0.279398"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id:okayBtn</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-06-20T10:32:32.630019" elapsed="0.324788"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-20T10:32:32.956443" level="INFO">Clicking button 'id:okayBtn'.</msg>
+<arg>id:okayBtn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-20T10:32:32.955551" elapsed="0.307539"/>
+</kw>
+<kw name="Select From List By Value" owner="SeleniumLibrary">
+<msg time="2025-06-20T10:32:33.264635" level="INFO">Selecting options from selection list 'css:select[class='form-control']' by value teach.</msg>
+<arg>css:select[class='form-control']</arg>
+<arg>teach</arg>
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<status status="PASS" start="2025-06-20T10:32:33.263786" elapsed="0.351785"/>
+</kw>
+<status status="PASS" start="2025-06-20T10:32:31.774753" elapsed="1.841178"/>
+</kw>
+<status status="PASS" start="2025-06-20T10:32:29.769133" elapsed="3.847653"/>
+</test>
+<doc>To Validate the Login Page</doc>
+<status status="PASS" start="2025-06-20T10:32:29.208248" elapsed="4.411198"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="testDemo2" id="s1" pass="1" fail="0" skip="0">testDemo2</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

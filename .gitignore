@@ -1,3 +1,7 @@
-# repos
-/.idea
+# PyCharm / VSCode / IDE configs
+.idea/
 
+# Robot Framework
+tests/output.xml
+tests/report.html
+tests/log.html

@@ -5,3 +5,9 @@
 tests/output.xml
 tests/report.html
 tests/log.html
+
+# Ignore all screenshot image formats
+*.png
+*.jpg
+*.jpeg
+

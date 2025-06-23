@@ -4,7 +4,7 @@
 Documentation            To Validate the Login Page
 Library                  SeleniumLibrary
 Test Setup               open the browser with mortgage payment url    #Beginning
-#Test Teardown            Close Browser Session    #Ending
+Test Teardown            Close Browser Session    #Ending
 Resource                 resource.robot     #give two tabs between "Resource" and "resource.robot"
 
 *** Variables ***
@@ -14,20 +14,20 @@ ${Card_Titles}             css:h4[class='card-title']
 ${cardname}                Blackberry
 
 *** Test Cases ***
-#Validate UnSuccessful Login
-#    Fill the login form    ${valid_user_name}    ${invalid_password}
-#    wait until element is loaded    ${Error_Message_Login}
-#    verify the error message is correct
-#
-#Validate Cards Display in Shopping Page
-#    Fill the login form    ${valid_user_name}    ${valid_password}
-#    wait until element is loaded    ${Shop_Page_Load}
-#    Verify the Card Titles in the Shop Page
-#    Select the card    ${cardname}
+Validate UnSuccessful Login
+    Fill the login form    ${valid_user_name}    ${invalid_password}
+    wait until element is loaded    ${Error_Message_Login}
+    verify the error message is correct
+
+Validate Cards Display in Shopping Page
+    Fill the login form    ${valid_user_name}    ${valid_password}
+    wait until element is loaded    ${Shop_Page_Load}
+    Verify the Card Titles in the Shop Page
+    Select the card    ${cardname}
 
 Select the Form and navigate to child window
     Fill the Login Details and Login Form
-    #Check the --
+
 
 *** Keywords ***
 Fill the login form
@@ -78,9 +78,13 @@ Fill the Login Details and Login Form
     Input Text            id:username            rahulshettyacademy
     Input Password        password               learning
     Click Button          css:input[value='user']
-    Wait Until Element Is Visible    id:okayBtn
-    Click Button          id:okayBtn
+    Wait Until Element Is Visible    css:div[class='modal-content']
+    Click Button          css:button[id='okayBtn']
+    Wait Until Element Is Not Visible    css:div[class='modal-content']
     Select From List By Value    css:select[class='form-control']    teach
+    Select Checkbox    css:input[id='terms']
+    Checkbox Should Be Selected    css:input[id='terms']
+
 
 
     

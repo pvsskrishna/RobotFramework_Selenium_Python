@@ -1,0 +1,293 @@
+Robot Framework File Structure
+------------------------------
+	*** Settings ***       # Import libraries, resources, setup/teardown
+	*** Variables ***      # Declare global or scoped variables
+	*** Test Cases ***     # Actual test scenarios
+	*** Keywords ***       # Reusable logic and functions (custom keywords)
+
+
+*** Settings ***
+-----------------
+1. Documentation    <description text>
+
+	Used to describe the purpose of the test suite, test case, or keyword.
+	Can be multiline using ...
+	Improves readability and maintainability.
+
+	Ex:1 	Documentation    This test validates the login page functionality.
+	Ex:2 	Documentation   A resource file with reusable keywords and variables
+             	...             the system specific keywords created here form our own
+             	...             domain specific language.
+
+2. Library    <library_name>    [optional_args]
+	Imports external libraries (such as SeleniumLibrary, Collections, String).
+	You can also import custom Python libraries.
+
+	Ex: 	Library    SeleniumLibrary
+		Library    Collections
+		Library    String
+
+3. Test Setup    <keyword_name>    [optional_args]
+	Defines a keyword to run before each test case in the file.
+	Ensures test starts in a clean, expected state.
+	
+	Ex: 	Test Setup    open the browser with mortgage payment url
+
+4. Test Teardown    <keyword_name>    [optional_args]
+
+	Defines a keyword to run after each test case in the file.
+	Used for cleanup tasks like closing the browser.
+
+	Ex:	Test Teardown    Close Browser
+
+5. Resource    <path_to_resource_file>
+	Imports external .robot files containing shared variables and keywords.
+	Keeps the main test file clean and modular.
+
+	Ex: 	Resource    resource.robot
+
+	resource.robot –-> Shared Utility Module
+	This file contains reusable variables and keywords to avoid redundancy across .robot test files.
+
+Ex:
+*** Settings ***
+Documentation      To Validate the Login Page
+Library            SeleniumLibrary
+Library            Collections
+Library            String
+Test Setup         open the browser with mortgage payment url		# This is Test Setup, which will be available in resource.robot
+Test Teardown      Close Browser					#close browser is a Keword
+Resource           resource.robot
+
+# one file will be having only one Documentation under ***Settings*** section.
+
+
+*** Variables ***
+-----------------
+
+ To declare reusable values like locators, URLs, test data (e.g., usernames/passwords), and dynamic configuration.
+
+Syntax Format:
+	*** Variables ***
+	${scalar_variable}      some_value
+	@{list_variable}        item1    item2
+	&{dictionary_variable}  key1=value1    key2=value2
+
+1. Scalar Variables ${...}
+
+	Holds a single value like strings, numbers, locators, etc.
+	Most commonly used type.
+	
+	Ex:
+	${url}                     https://rahulshettyacademy.com/loginpagePractise/
+	${valid_user_name}         rahulshettyacademy
+	${invalid_password}        123456789
+	${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]
+
+2. List Variables @{...}
+
+	Used to store a collection of items (like a Python list).
+	Useful when dealing with multiple expected values, dropdowns, card titles, etc.
+	
+	Ex:
+	@{expectedList}=    Create List    iphone X    Samsung Note 8    Nokia Edge    Blackberry
+	
+	Usage:
+	FOR    ${element}    IN    @{expectedList}
+    		Log    ${element}
+	END
+
+3. Dictionary Variables &{...}
+
+	Key-value pairs (like Python dictionaries).
+	Less commonly used, but great for structured data.
+
+	Ex:
+	&{credentials}    username=admin    password=1234
+
+4. Variable Assignment Methods
+
+	a. You can also assign values dynamically during execution:
+
+	Ex:
+	${result}=    Get Text    id:some_element
+	
+	b. or global assignement:
+
+	Ex:
+	Set Global Variable    ${mail_id}
+
+Example:
+	*** Variables ***
+	${url}                     https://rahulshettyacademy.com/loginpagePractise/
+	${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]
+	${valid_user_name}         rahulshettyacademy
+	${invalid_user_name}       varunpaladugula
+	${valid_password}          learning
+	${invalid_password}        123456789
+	${url}                     https://rahulshettyacademy.com/loginpagePractise/
+	@{expectedList}            iphone X    Samsung Note 8    Nokia Edge    Blackberry
+	
+
+Global Variables:
+-----------------
+	if we crete a variable under ***keywords*** > Test Scenario - That can be used only inside that test Scenario.
+	so to make it global available, we will use "Set Global Variable" Keyword.
+
+	ex:
+		Grab the Email id present in the child window
+		    ${text_extracted} =     Get Text    css:p[class='im-para red']    #which is a string
+		    @{1st_split_list}=      Split String    ${text_extracted}    at      #this a list
+		    ${string_1}=    Get From List    ${1st_split_list}    1
+		    @{2nd_split_list}=    Split String    ${string_1}         #splaiting string at white space
+		    ${mail_id}=    Get From List    ${2nd_split_list}    0
+		    Set Global Variable        ${mail_id}
+
+		Switch back to the Parent window and enter the Email Id
+		    Switch Window    MAIN
+		    Title Should Be    LoginPage Practise | Rahul Shetty Academy
+		    Input Text        id:username    ${mail_id}    Clear Element Text
+
+
+*** Test Cases ***
+-------------------
+To define individual test scenarios that describe user actions and validations step by step.
+	
+	*** Test Cases ***
+	Test Case Name
+    	    Step 1
+            Step 2
+            Step 3
+	
+    Ex:
+    *** Test Cases ***
+    Validate UnSuccessful Login
+        Fill the login form    ${valid_user_name}    ${invalid_password}
+    	wait until element is loaded    ${Error_Message_Login}
+    	verify the error message is correct
+
+
+*** Keywords ***
+-------------------
+  To define user-defined keywords (like functions in Python) that group actions together. This promotes:
+	Reusability
+	Readability
+	Maintainability
+
+    These are like user defined functions.
+    Here keywords means the test scenario written under each test case.
+    Each test Scenario will act as a keyword. 
+    Under each Keyword we will be using robot framework keywords from different libraries to acheive the desired functionality.
+
+    Keyword Name: Like a function name (clear and descriptive).
+    Steps: Can include built-in, library, or other custom keywords.
+    Optional arguments using [Arguments].
+
+	Ex:
+	*** Keywords ***
+	Fill the login form
+    	    [Arguments]       ${username}     ${password}
+    	    Input Text        css:input[name='username']     ${username}
+            Input Password    css:input[name='password']     ${password}
+            Click Button      id:signInBtn
+
+    This wraps up the login action so you can reuse it in multiple test cases.
+    You just call it like:
+        Fill the login form    ${valid_user_name}    ${invalid_password}
+
+Common Keywords:
+----------------
+-->Keyword with Arguments:
+
+    wait until element is loaded
+    [Arguments]    ${element}
+    Wait Until Element Is Visible    ${element}
+
+-->Keyword with Conditional Logic:
+
+    Ex: This is a powerful example: comparison of UI elements vs expected list using custom logic.
+    Verify the Card Titles in the Shop Page
+        @{expectedList}=    Create List    iphone X    Samsung Note 8    Nokia Edge    Blackberry
+        @{elements}=        Get Webelements    ${Card_Titles}
+        @{actualList}=      Create List
+
+        FOR    ${element}    IN    @{elements}
+            Append To List     ${actualList}    ${element.text}
+        END
+
+        ${areEqual}=    Evaluate    ${expectedList}==${actualList}
+        IF     ${areEqual} == ${TRUE}
+            Log     Lists are Equal
+        ELSE
+            Log    List are not matching
+        END
+
+-->Keyword for Child Window Handling:
+
+    Ex:
+    Grab the Email id present in the child window
+        ${text_extracted}=    Get Text    css:p[class='im-para red']
+        @{1st_split_list}=    Split String    ${text_extracted}    at
+        ${string_1}=          Get From List    ${1st_split_list}    1
+        @{2nd_split_list}=    Split String    ${string_1}
+        ${mail_id}=           Get From List    ${2nd_split_list}    0
+        Set Global Variable   ${mail_id}
+
+
+List:
+-----
+	 To declare list we will be using syntax
+	 @{list}=	Create List
+	 @{expectedList}=    Create List    iphone X     Samsung Note 8    Nokia Edge    Blackberry
+	 @{elements}=    Get Webelements    ${Card_Titles}
+	 @{actualList}=    Create List 		#empty list
+
+	 To create list we will use @{list} but to use it again we will use dolar symbol before it--> ${list}
+	 Just for creating the list we will be using @ before the variables
+	 once it is created then onwords we will be using the $ symbol
+
+Robot Keywords:
+---------------
+-->Browser Setup and Navigation:
+    1. Create Webdriver
+
+    syntax:
+    Create Webdriver    browser_name    alias=None    kwargs
+
+    Ex:
+    Create Webdriver    Chrome
+
+    2. Go To
+
+    syntax:
+    Go To    url
+
+    Ex:
+    Go To    https://rahulshettyacademy.com/loginpagePractise/
+
+3. Maximize Browser Window
+
+    syntax:
+    Maximize Browser Window
+
+4. Close Browser / Close Browser Session
+
+    syntax:
+    Close Browser
+
+-->Form Interaction (Login, Inputs):
+5. Input Text
+
+    Syntax:
+    Input Text    locator    text    clear=False
+
+    Ex:
+    Input Text    id:username    varunpaladugula
+
+
+
+
+
+
+
+

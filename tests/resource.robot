@@ -13,21 +13,18 @@ Library         String
 
 *** Variables ***
 ${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]
-
 ${valid_user_name}         rahulshettyacademy 
 ${invalid_user_name}       varunpaladugula
-
 ${valid_password}          learning
 ${invalid_password}        123456789
-
 ${url}                     https://rahulshettyacademy.com/loginpagePractise/
 
 *** Keywords ***
 
 open the browser with mortgage payment url
-#    Open Browser     ${URL}         chrome         options=add_experimental_option("detach", True)
-    Create Webdriver            Chrome
-    Go To                       ${url}
+    Open Browser     ${URL}         chrome         options=add_experimental_option("detach", True)
+#    Create Webdriver            Chrome
+#    Go To                       ${url}
     Maximize Browser Window
 
 Close Browser Session

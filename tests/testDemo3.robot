@@ -2,7 +2,7 @@
 Documentation      To Validate the Login Page
 Library            SeleniumLibrary
 Test Setup         open the browser with mortgage payment url
-Test Teardown      Close Browser
+#Test Teardown      Close Browser
 Resource           resource.robot
 
 *** Variables ***
@@ -50,5 +50,7 @@ Switch back to the Parent window and enter the Email Id
     Switch Window    MAIN
     Title Should Be    LoginPage Practise | Rahul Shetty Academy
     Input Text        id:username    ${mail_id}    Clear Element Text
+    log     ${mail_id}
+
     
 

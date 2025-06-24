@@ -1,13 +1,13 @@
 Robot Framework File Structure
-------------------------------
+------------------------------------------------------------------------------------------------------------------------
 	*** Settings ***       # Import libraries, resources, setup/teardown
 	*** Variables ***      # Declare global or scoped variables
 	*** Test Cases ***     # Actual test scenarios
 	*** Keywords ***       # Reusable logic and functions (custom keywords)
 
-
+------------------------------------------------------------------------------------------------------------------------
 *** Settings ***
------------------
+------------------------------------------------------------------------------------------------------------------------
 1. Documentation    <description text>
 
 	Used to describe the purpose of the test suite, test case, or keyword.
@@ -61,9 +61,9 @@ Resource           resource.robot
 
 # one file will be having only one Documentation under ***Settings*** section.
 
-
+------------------------------------------------------------------------------------------------------------------------
 *** Variables ***
------------------
+------------------------------------------------------------------------------------------------------------------------
 
  To declare reusable values like locators, URLs, test data (e.g., usernames/passwords), and dynamic configuration.
 
@@ -128,9 +128,9 @@ Example:
 	${url}                     https://rahulshettyacademy.com/loginpagePractise/
 	@{expectedList}            iphone X    Samsung Note 8    Nokia Edge    Blackberry
 	
-
+------------------------------------------------------------------------------------------------------------------------
 Global Variables:
------------------
+------------------------------------------------------------------------------------------------------------------------
 	if we crete a variable under ***keywords*** > Test Scenario - That can be used only inside that test Scenario.
 	so to make it global available, we will use "Set Global Variable" Keyword.
 
@@ -148,9 +148,9 @@ Global Variables:
 		    Title Should Be    LoginPage Practise | Rahul Shetty Academy
 		    Input Text        id:username    ${mail_id}    Clear Element Text
 
-
+------------------------------------------------------------------------------------------------------------------------
 *** Test Cases ***
--------------------
+------------------------------------------------------------------------------------------------------------------------
 To define individual test scenarios that describe user actions and validations step by step.
 	
 	*** Test Cases ***
@@ -166,9 +166,9 @@ To define individual test scenarios that describe user actions and validations s
     	wait until element is loaded    ${Error_Message_Login}
     	verify the error message is correct
 
-
+------------------------------------------------------------------------------------------------------------------------
 *** Keywords ***
--------------------
+------------------------------------------------------------------------------------------------------------------------
   To define user-defined keywords (like functions in Python) that group actions together. This promotes:
 	Reusability
 	Readability
@@ -176,8 +176,8 @@ To define individual test scenarios that describe user actions and validations s
 
     These are like user defined functions.
     Here keywords means the test scenario written under each test case.
-    Each test Scenario will act as a keyword. 
-    Under each Keyword we will be using robot framework keywords from different libraries to acheive the desired functionality.
+    Each test Scenario will act as a keyword. Basically we can say "Custom Keywords (User-defined)"
+    Under each Custom Keyword we will be using robot framework keywords from different libraries to achieve the desired functionality.
 
     Keyword Name: Like a function name (clear and descriptive).
     Steps: Can include built-in, library, or other custom keywords.
@@ -242,13 +242,14 @@ List:
 	 @{elements}=    Get Webelements    ${Card_Titles}
 	 @{actualList}=    Create List 		#empty list
 
-	 To create list we will use @{list} but to use it again we will use dolar symbol before it--> ${list}
+	 To create list we will use @{list} but to use it again we will use dollar symbol before it--> ${list}
 	 Just for creating the list we will be using @ before the variables
-	 once it is created then onwords we will be using the $ symbol
-
+	 once it is created then onwards we will be using the $ symbol
+========================================================================================================================
 Robot Keywords:
----------------
+========================================================================================================================
 -->Browser Setup and Navigation:
+---------------------------------
     1. Create Webdriver
 
     syntax:
@@ -276,7 +277,9 @@ Robot Keywords:
     Close Browser
 
 -->Form Interaction (Login, Inputs):
+-------------------------------------
 5. Input Text
+    Fills a text input field.
 
     Syntax:
     Input Text    locator    text    clear=False
@@ -284,10 +287,246 @@ Robot Keywords:
     Ex:
     Input Text    id:username    varunpaladugula
 
+6. Input Password
+    Both Input text and Input Password are almost same only difference is Input Password will mask the data in log files.
+    Similar to Input Text but masks input (used for password fields).
 
+    syntax:
+    Input Password    locator    password    clear=False
 
+7. Click Button
+    Clicks a button element.
 
+    Syntax:
+    Click Button    locator
 
+    Ex:
+    Click Button    id:signInBtn
 
+8. Select From List By Value
+    Selects a value from a dropdown using the option's value attribute.
 
+    syntax:
+    Select From List By Value    locator    value    #value can be anything from the dropdown value
+
+9. Select Checkbox
+    Selects a checkbox if not already selected.
+
+    syntax:
+    Select Checkbox    locator
+
+10. Checkbox Should Be Selected
+    Verifies that a checkbox is selected.
+
+    syntax:
+    Checkbox Should Be Selected    locator
+
+-->Waits and Conditions:
+------------------------
+11. Wait Until Element Is Visible
+    Waits until an element is present and visible. by default it will wait upto 5 to 7 seconds.
+
+    syntax:
+    Wait Until Element Is Visible    locator    timeout=default
+
+12. Wait Until Element Is Not Visible
+    Waits until the specified element disappears.
+
+    syntax:
+    Wait Until Element Is Not Visible    locator    timeout=default
+
+13. Wait Until Location Contains
+    Waits until the current URL contains the specified substring.
+
+    syntax:
+    Wait Until Location Contains    expected_url_part    timeout=default
+
+--> Validation and Assertions:
+-------------------------------
+14. Element Text Should Be
+    Verifies that an element’s text matches the expected value.
+
+    syntax:
+    Element Text Should Be    locator    expected
+
+15. Should Be Equal As Strings
+    Compares two strings for equality.
+
+    Syntax:
+    Should Be Equal As Strings    string1    string2
+
+--> Loops and Logic:
+---------------------
+16. FOR
+    Iterates over a list of elements.
+    Used for comparing or interacting with a set of web elements.
+
+    FOR    ${item}    IN    @{list}
+        Log    ${item}
+    END
+
+17. IF/ELSE
+    IF    ${condition}
+        Log    Condition Met
+    ELSE
+        Log    Condition Failed
+    END
+
+18. Evaluate
+    Runs a Python expression.
+
+    syntax:
+    Evaluate    expression
+
+    Ex:
+    ${areEqual}=    Evaluate    ${expectedList}==${actualList}
+
+--> Data Handling:
+------------------
+19. Split String
+    Splits a string and returns a list.
+    Useful for parsing text like email IDs or dynamic content.
+
+    Synatx:
+    Split String    string    separator=None
+
+20. Get From List
+    Fetches a value from a specific index in a list.
+
+    syntax:
+    Get From List    list    index
+
+21. Append To List
+    Appends a new value to a list.
+
+    syntax:
+    Append To List    list    value
+
+22. Create List
+    Creates a new list of values.
+
+    syntax:
+    Create List    item1    item2    ...
+
+23. Get Webelements
+    Returns a list of web elements matching the locator.
+
+    syntax:
+    Get Webelements    locator
+
+24. Log
+    Logs a message to the console/logs.
+
+    syntax:
+    Log    message
+
+25. Set Global Variable
+    Makes a variable available globally across test cases.
+
+    syntax:
+    Set Global Variable    ${variable}
+
+--> Window and Tab Handling:
+-----------------------------
+26. Switch Window
+    Switches between browser windows or tabs.
+
+    syntax:
+    Switch Window    NEW / MAIN / title / locator
+
+    #MAIN is parent window
+    #NEW is newly or recently opened window
+    #title is to switch to specific title tab
+
+27. Title Should Be
+    Verifies the title of the current page.
+
+    syntax:
+    Title Should Be    expected_title
+
+28. Insert to List
+    Adds an item at a specific position
+
+    syntax:
+    Insert To List    ${list_variable}    index    value
+
+    Ex:
+    @{fruits}    Create List    Apple    Banana
+    Insert To List    ${fruits}    1    Mango
+
+    Result:
+    ${fruits} = [Apple, Mango, Banana]
+
+29. Set Variable
+    Used to create or overwrite a variable during execution.
+
+    Syntax:
+    ${result}=    Set Variable    Hello
+
+    Ex:
+    ${url}=    Set Variable    https://example.com
+
+30. Get Variable
+    Used to dynamically fetch a variable using its name.
+
+    Syntax:
+    ${value}=    Get Variable    ${variable_name}
+
+    Ex:
+    ${var_name}=     Set Variable      ${valid_user_name}
+    ${value}=        Get Variable      ${var_name}
+    Log              ${value}          # Logs the value of ${valid_user_name}
+
+31. Exit For Loop If
+    To exit the loop prematurely when a specific condition is met — just like break in Python.
+
+    syntax:
+    Exit For Loop If    <condition>
+
+    Ex:
+    Exit For Loop If    Evaluate    ${value} > 100
+
+    # Only works inside a FOR loop
+    # Condition should be quoted properly when comparing strings
+        Ex:
+        Exit For Loop If    ${fruit} == Mango           ---> Incorrect quotes
+        ❌ This will try to evaluate Mango as a variable or Python identifier (which doesn't exist), causing an error.
+
+        Exit For Loop If    '${fruit}' == 'Mango'           ---> Correct quotes
+        ✔ This compares the actual string value stored in ${fruit} with the string "Mango"
+
+    # Use Evaluate if your condition is complex:
+------------------------------------------------------------------------------------------------------------------------
+Differences:
+------------------------------------------------------------------------------------------------------------------------
+Q1. Difference between Set Variable and Get Variable Key word?
+    ### 🔁 Set Variable vs Get Variable – Explained
+
+| Feature            | `Set Variable`                                 | `Get Variable`                                 |
+|--------------------|------------------------------------------------|------------------------------------------------|
+| 📌 Purpose         | Assign a new value to a variable               | Retrieve the value of an existing variable     |
+| ⛏️ Main Use        | Define or overwrite a variable inline          | Access value when name is dynamic or stored    |
+| 🎯 Syntax          | `Set Variable    value`                        | `Get Variable    ${variable_name}`             |
+| 🧠 Result Stored In| A new `${}` variable                           | Also returns value into a `${}` variable       |
+
+Q2. Difference between Insert To List and Append To List?
+
+| Feature            | `Insert To List`                                           | `Append To List`                              |
+|--------------------|------------------------------------------------------------|------------------------------------------------|
+| 📌 Purpose         | Insert an item at a **specific index** in the list         | Add an item to the **end** of the list         |
+| 📍 Position        | You specify the index (e.g., 0 for beginning)              | Always added to the last position              |
+| 🎯 Syntax          | `Insert To List    ${list}    index    value`             | `Append To List    ${list}    value`           |
+| 🧱 Use Case        | When order matters (e.g., inserting at start or middle)   | When order doesn't matter or collecting items  |
+| 🧠 Result Stored In| Modifies the existing list in-place                        | Modifies the existing list in-place            |
+
+Q3. Difference between Set Global Variable and Set Test Variable?
+### 🌍 Set Global Variable vs Set Test Variable – Explained
+
+| Feature            | `Set Global Variable`                                         | `Set Test Variable`                                      |
+|--------------------|-----------------------------------------------------------    |-----------------------------------------------------------|
+| 📌 Purpose         | Makes a variable available **across all test cases & suites** | Makes a variable available **only within the current test case** |
+| 🌐 Scope           | Global (visible in all tests and keywords)                    | Test-level (visible only in the current test case)         |
+| 🎯 Syntax          | `Set Global Variable    ${variable}`                          | `Set Test Variable    ${variable}`                         |
+| 🔁 Lifetime        | Until the execution ends                                      | Ends after the test case finishes                          |
+| 🧠 Common Use Case | Share login/session data across tests                         | Store temporary values for a single test                   |
 

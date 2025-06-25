@@ -1,0 +1,94 @@
+(Find the Implementation form testDemo4.robot file)
+
+Q1. What is parameterization? and
+    How to run the same test with different Data Sets?
+
+    Ex: login page scenarios
+        Scenario 1: Valid UN and Invalid PWD
+        Scenario 2: Valid UN and Valid PWD
+        Scenario 3: Valid UN and Valid PWD
+        Scenario 4: Invalid UN and Valid PWD
+        Scenario 5: Invalid UN and Invalid PWD
+
+    Ans:
+    ### 🧩 Robot Framework – Test Template
+
+    Test Template** is used to apply the same keyword (custom or library) to multiple data rows without repeating the keyword.
+
+    ✅ Structure:
+    -------------
+    *** Settings ***
+    Test Template    <Keyword Name>
+
+    *** Test Cases ***
+    Test Case Name    arg1    arg2 ...
+
+    *** Keywords ***
+    <Keyword Name>
+        [Arguments]    ${arg1}    ${arg2}
+        Step 1
+        Step 2
+
+    ✅ Basic Example:
+    -----------------
+    *** Settings ***
+    Test Template    Login With Credentials                     -----------> Add Test Template  <Keyword name>
+
+    *** Test Cases ***        username              password    -----------> Just like column headers in Excel add parameters here
+    Valid Login               rahulshetty           learning    -----------> These are called data sets
+    Invalid Login             varunpaladugula       wrongpass
+
+    *** Keywords ***                                            -----------> change *** Test Cases *** to *** Keywords ***, because this is a not test case anymore it has become Test Template.
+    Login With Credentials
+        [Arguments]    ${username}    ${password}
+        Input Text     id:username    ${username}
+        Input Password id:password    ${password}
+        Click Button   id:signInBtn
+
+    🎯 Benefits:
+    - Clean and readable test cases
+    - Easy to scale test data
+    - Reduces duplication
+
+✅ Real Example:
+-----------------
+
+*** Settings ***
+Documentation      To Validate the Login Page
+Library            SeleniumLibrary
+Test Setup         open the browser with mortgage payment url
+Test Teardown      Close Browser
+Resource           resource.robot
+Test Template     Validate UnSuccessful Login
+
+*** Variables ***
+${Error_Message_Login}     css:div[class='alert alert-danger col-md-12']
+#${Error_Message_Login}     CSS:[class="alert alert-danger col-md-12"][style="display: none;"]
+
+*** Test Cases ***                            username                   password
+Valid UN and Invalid PWD                   rahulshettyacademy            learn
+Invalid UN and Valid PWD                   rahul                          learning
+Invalid UN and Invalid PWD                 rahul                          learn
+Special characters                         !%&                           !@}})
+Numbers                                    12345                          6543
+
+*** Keywords ***
+Validate UnSuccessful Login
+    [Arguments]        ${username}        ${password}
+    Fill the login form    ${username}        ${password}
+    wait until it checks and displays error message
+    verify the error message is correct
+
+Fill the login form
+    [Arguments]        ${username}        ${password}
+    Input Text        id:username    ${username}           Clear Element Text
+    Input Password    id:password    ${password}           Clear Element Text
+    Click Button      id:signInBtn
+
+wait until it checks and displays error message
+    Wait Until Element Is Visible    ${Error_Message_Login}
+
+verify the error message is correct
+    Comment    ${result} =     Get Text    ${Error_Message_Login}
+    Comment    Should Be Equal As Strings    ${result}    Incorrect username/password.
+    Element Text Should Be     ${Error_Message_Login}    Incorrect username/password.

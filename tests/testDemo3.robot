@@ -52,5 +52,6 @@ Switch back to the Parent window and enter the Email Id
     Input Text        id:username    ${mail_id}    Clear Element Text
     log     ${mail_id}
 
+
     
 

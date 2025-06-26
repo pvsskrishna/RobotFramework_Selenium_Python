@@ -7,6 +7,7 @@ Documentation   A resource file with reusable keywords and variables     #we use
 Library         SeleniumLibrary
 Library         Collections
 Library         String
+Library         DataDriver
 #Library         RPA.Browser.Selenium    auto_close=${FALSE}
 
 

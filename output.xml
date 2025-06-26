@@ -1,114 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3 (Python 3.13.2 on win32)" generated="2025-06-25T10:10:50.849786" rpa="false" schemaversion="5">
-<suite id="s1" name="RobotFramework" source="C:\Users\varun\PycharmProjects\RobotFramework">
-<suite id="s1-s1" name="Tests" source="C:\Users\varun\PycharmProjects\RobotFramework\tests">
-<suite id="s1-s1-s1" name="testDemo4" source="C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo4.robot">
-<test id="s1-s1-s1-t1" name="Numbers" line="20">
-<kw name="open the browser with mortgage payment url" owner="resource" type="SETUP">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-06-25T10:10:51.209286" level="INFO">Opening browser 'chrome' to base url 'https://rahulshettyacademy.com/loginpagePractise/'.</msg>
-<arg>${URL}</arg>
-<arg>chrome</arg>
-<arg>options=add_experimental_option("detach", True)</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-06-25T10:10:51.209026" elapsed="2.375207"/>
-</kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-06-25T10:10:53.584650" elapsed="0.032571"/>
-</kw>
-<status status="PASS" start="2025-06-25T10:10:51.208341" elapsed="2.409012"/>
-</kw>
-<kw name="Validate UnSuccessful Login">
-<kw name="Fill the login form">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-06-25T10:10:53.618812" level="INFO">Typing text '12345' into text field 'id:username'.</msg>
-<arg>id:username</arg>
-<arg>${username}</arg>
-<arg>Clear Element Text</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-06-25T10:10:53.618476" elapsed="0.195173"/>
-</kw>
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-06-25T10:10:53.814435" level="INFO">Typing password into text field 'id:password'.</msg>
-<msg time="2025-06-25T10:10:53.883364" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id:password</arg>
-<arg>${password}</arg>
-<arg>Clear Element Text</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-06-25T10:10:53.814022" elapsed="0.139182"/>
-</kw>
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-06-25T10:10:53.953584" level="INFO">Clicking button 'id:signInBtn'.</msg>
-<arg>id:signInBtn</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-06-25T10:10:53.953373" elapsed="0.105509"/>
-</kw>
-<arg>${username}</arg>
-<arg>${password}</arg>
-<status status="PASS" start="2025-06-25T10:10:53.618168" elapsed="0.440865"/>
-</kw>
-<kw name="wait until it checks and displays error message">
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>${Error_Message_Login}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-06-25T10:10:54.059732" elapsed="2.174110"/>
-</kw>
-<status status="PASS" start="2025-06-25T10:10:54.059237" elapsed="2.174725"/>
-</kw>
-<kw name="verify the error message is correct">
-<kw name="Comment" owner="BuiltIn">
-<arg>${result} =</arg>
-<arg>Get Text</arg>
-<arg>${Error_Message_Login}</arg>
-<doc>Displays the given messages in the log file as keyword arguments.</doc>
-<status status="PASS" start="2025-06-25T10:10:56.234446" elapsed="0.000108"/>
-</kw>
-<kw name="Comment" owner="BuiltIn">
-<arg>Should Be Equal As Strings</arg>
-<arg>${result}</arg>
-<arg>Incorrect username/password.</arg>
-<doc>Displays the given messages in the log file as keyword arguments.</doc>
-<status status="PASS" start="2025-06-25T10:10:56.234696" elapsed="0.000140"/>
-</kw>
-<kw name="Element Text Should Be" owner="SeleniumLibrary">
-<msg time="2025-06-25T10:10:56.235635" level="INFO">Verifying element 'css:div[class='alert alert-danger col-md-12']' contains exact text 'Incorrect username/password.'.</msg>
-<arg>${Error_Message_Login}</arg>
-<arg>Incorrect username/password.</arg>
-<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
-<status status="PASS" start="2025-06-25T10:10:56.234968" elapsed="0.021747"/>
-</kw>
-<status status="PASS" start="2025-06-25T10:10:56.234147" elapsed="0.022700"/>
-</kw>
-<arg>12345</arg>
-<arg>6543</arg>
-<status status="PASS" start="2025-06-25T10:10:53.617792" elapsed="2.639124"/>
-</kw>
-<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
-<doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-06-25T10:10:56.257306" elapsed="2.212140"/>
-</kw>
-<status status="PASS" start="2025-06-25T10:10:51.207639" elapsed="7.263103"/>
+<robot generator="Robot 7.3 (Python 3.13.2 on win32)" generated="2025-06-26T11:01:40.370901" rpa="false" schemaversion="5">
+<suite id="s1" name="testDemo5" source="C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo5.robot">
+<test id="s1-t1" name="Login with username ${username} and password ${password}" line="15">
+<status status="FAIL" start="2025-06-26T11:01:40.945110" elapsed="0.001196">Test cannot be empty.</status>
 </test>
 <doc>To Validate the Login Page</doc>
-<status status="PASS" start="2025-06-25T10:10:50.883802" elapsed="7.590821"/>
-</suite>
-<status status="PASS" start="2025-06-25T10:10:50.882664" elapsed="7.596435"/>
-</suite>
-<status status="PASS" start="2025-06-25T10:10:50.851531" elapsed="7.631438"/>
+<status status="FAIL" start="2025-06-26T11:01:40.374250" elapsed="0.573428"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="RobotFramework" id="s1" pass="1" fail="0" skip="0">RobotFramework</stat>
-<stat name="Tests" id="s1-s1" pass="1" fail="0" skip="0">RobotFramework.Tests</stat>
-<stat name="testDemo4" id="s1-s1-s1" pass="1" fail="0" skip="0">RobotFramework.Tests.testDemo4</stat>
+<stat name="testDemo5" id="s1" pass="0" fail="1" skip="0">testDemo5</stat>
 </suite>
 </statistics>
 <errors>
+<msg time="2025-06-26T11:01:40.938030" level="ERROR">[ DataDriver ] Error in robot file:
+  File "C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo5.robot", line 0</msg>
+<msg time="2025-06-26T11:01:40.938416" level="ERROR">In source file:
+  File "data.csv", line 0</msg>
+<msg time="2025-06-26T11:01:40.942582" level="ERROR">Calling method '_start_suite' of listener 'DataDriver' failed: FileNotFoundError: File attribute was not a full path. Tried to find C:\Users\varun\PycharmProjects\RobotFramework\tests\data.csv but file does not exist.</msg>
 </errors>
 </robot>

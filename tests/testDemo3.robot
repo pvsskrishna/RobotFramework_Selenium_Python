@@ -2,7 +2,7 @@
 Documentation      To Validate the Login Page
 Library            SeleniumLibrary
 Test Setup         open the browser with mortgage payment url
-#Test Teardown      Close Browser
+Test Teardown      Close Browser
 Resource           resource.robot
 
 *** Variables ***
@@ -25,7 +25,7 @@ Click the link of Child Window
 Verify the user is Switched to Child Window
     Switch Window        NEW
     Wait Until Location Contains    documents-request    timeout=15s
-    Element Text Should Be    css:h1    ${Child_Window_Text}
+    Element Text Should Be    css:h2    ${Child_Window_Text}
 
 Grab the Email id present in the child window
     ${text_extracted} =     Get Text    css:p[class='im-para red']    #which is a string

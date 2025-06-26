@@ -1,0 +1,6 @@
+*** Test Cases ***,${username},${password}
+Valid UN and Invalid PWD,rahulshettyacademy,learn
+Invalid UN and Valid PWD,rahul,learning
+Invalid UN and Invalid PWD,rahul,learn
+Special characters,!%&,!@}})
+Numbers,12345,6543

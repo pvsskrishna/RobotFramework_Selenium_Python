@@ -1,0 +1,56 @@
+Q. How to load the data from csv to robot tests - external plugins? ---->testDemo5.robot
+
+Situation:
+    1. If we don't want data displayed in tests
+    2. Don't want test data should be existed in test files
+    3. To make the data available from external files like CSV.
+
+Steps to Achieve:
+    To achieve this directly we cant do this because Robot framework is not providing any inbuilt features.
+    we can install another plugin - just like another library is "datadriver".
+    But by default Data driver library will not come with robot framework installation.
+    So, how "robotframework-seleniumlibrary" installed separately we have to install "robotframwework-datadriver" library as well.
+
+Steps:
+1. add Library  DataDriver in *** Settings ***
+
+    Library  DataDriver     file=resources/data.csv     encoding=utf_8      dialect=unix
+
+2. Change the *** Test Cases *** as below.
+
+    *** Test Cases ***
+    Login with username ${username} and password ${password}
+
+    # we can also add some default data incase file got corrupted like below.
+    Login with username ${username} and password ${password}    abc     1234
+
+3.  In CSV file add the data from *** Test Cases *** as follows:
+    (Just like the *** Test Cases *** section used to have the data- but with coma separated)
+
+    *** Test Cases ***,username,password
+    Valid UN and Invalid PWD,rahulshettyacademy,learn
+    Invalid UN and Valid PWD,rahul,learning
+    Invalid UN and Invalid PWD,rahul,learn
+    Special characters,!%&,!@}})
+    Numbers,12345,6543
+
+    NOTE: username and password in first line should be exact match with the [Arguments] present in *** Keywords ***
+    i.e ${username},${password}
+    Because, The *** Keywords *** is having arguments ${username}and ${password}.
+            *** Keywords ***
+            Validate UnSuccessful Login
+                [Arguments]        ${username}        ${password}
+                Fill the login form    ${username}        ${password}
+                wait until it checks and displays error message
+                verify the error message is correct
+                These names have to be column headers in CSV file as column header.
+
+    *** Test Cases ***,${username},${password}
+    Valid UN and Invalid PWD,rahulshettyacademy,learn
+    Invalid UN and Valid PWD,rahul,learning
+    Invalid UN and Invalid PWD,rahul,learn
+    Special characters,!%&,!@}})
+    Numbers,12345,6543
+
+=========================== That's it - we are ready to do data driven testing using csv file ==================================
+

@@ -2,7 +2,7 @@
 *** Settings ***
 Documentation      To Validate the Login Page
 Library            SeleniumLibrary
-Library            DataDriver  file=data.csv    encoding=utf_8    dialect=unix
+Library            DataDriver  file=../resources/data.csv    encoding=utf_8    dialect=unix
 Test Setup         open the browser with mortgage payment url
 Test Teardown      Close Browser
 Resource           resource.robot
@@ -12,7 +12,7 @@ Test Template      Validate UnSuccessful Login
 ${Error_Message_Login}     css:div[class='alert alert-danger col-md-12']
 
 *** Test Cases ***
-Login with username ${username} and password ${password}
+Login with username ${username} and password ${password}    #varun       12345
     
 *** Keywords ***
 Validate UnSuccessful Login

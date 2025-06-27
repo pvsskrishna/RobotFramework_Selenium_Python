@@ -1,0 +1,92 @@
+Q. What are custom User defined Keywords? and why should we need them?
+
+Ans:
+NOTE: Here "Custom user defined keywords" and Keywords what we created under *** Keywords *** is different.
+
+Here user defined custom keywords means, Just like how we are using some keywords from Robot framework like
+    Switch Window, Click Element etc...
+    these all are selenium library keywords from robot framework.
+
+   Similarly, now we are creating our own library which is having Our own custom user defined keywords.
+
+But Why?
+--------
+    if we remember this below code.
+
+        *** Keywords ***
+        Select the card
+            [Arguments]    ${cardname}
+            @{elements}=    Get Webelements    ${Card_Titles}
+            ${index}    Set Variable    1
+            FOR    ${element}    IN    @{elements}
+                Exit For Loop If    '${element.text}' == '${cardname}'    #quotes are from syntax
+                ${index} =    Evaluate    ${index} + 1    #We need to add Evaluate Keyword, For every steps or line there should be one Keyword in Robot Framework
+            END
+            Click Button    xpath:(//button[@class='btn btn-info'])[${index}]
+            Log     ${element.text}
+
+    The above scenario is clicking a single element from a e-commerce site to add that to a cart.
+
+    what if we want to click two items, or n items. Then this code will become much more complex where we loose flavour of robot framework.
+    So, to avoid that we are using these "Custom User Defined Keywords"
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q. How to Achieve:
+
+    Step 1:
+        Create a new directory or folder in hierarchy.
+            Ex: customLibraries
+
+    Step 2:
+        Create a python file.
+            Ex: Shop.py
+
+    Step 3:
+        Inside that file create a class with the file name.
+        RULE: Name of the file and Class name should be exactly same.
+
+        Ex:
+            if class name is -----> class Shop:
+            then, file name should be -----> Shop.py
+
+    Step 4:
+        Here in this class what ever method we write will be considered as Keyword.
+        But to use it we need to import the file name just like "Library    SeleniumLibrary" in *** Settings ***
+
+        Library     ../customLibraries/Shop.py
+
+        Ex:
+            class Shop:
+                def __init__(self):
+                    #method name will be converted to keyword name --> Hello World
+
+                def hellow_world(self):
+                    print("hello")
+
+    Step 5:
+        But we need to provide some tweaks to this python file, Like
+        @library -----> add this on top class, so that RF will think that it is not a normal class it is a Library.
+        @keyword -----> add this on top of method, so RF will think it is a keyword.
+
+        Ex:
+            from robot.api.deco import library, keyword
+
+            @library
+            class Shop:
+                #def __init__(self):
+                    #method name will be converted to keyword name --> Hello World
+
+                @keyword
+                def hellow_world(self):
+                    print("hello")
+
+        If @library and @keyword are displaying error red line, that means you need to import below line.
+        from robot.api.deco import library, keyword
+        (No need to remember this automatically on mouse hovering it will display to import)
+
+That's it we can make use of the keywords present in that developed in customLibraries
+    Ex: In this case we can use Hello World keyword
+
+============================================================================================================================================
+Q. How to access Selenium Library instance to Python custom Library files?
+

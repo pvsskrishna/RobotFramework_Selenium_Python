@@ -54,3 +54,28 @@ Steps:
 
 =========================== That's it - we are ready to do data driven testing using csv file ==================================
 
+what is this sentence ?
+    *** Test Cases ***
+    Login with username ${username} and password ${password} ----> this sentence?
+
+Explanation:
+    Point 1:
+        In csv file writing *** Test Cases *** name is not mandatory.
+            ex: Valid UN and Invalid PWD
+
+        we can also provide data without giving the test case name in csv file.
+            ex: *** Test Cases ***,${username},${password}
+                Valid UN and Invalid PWD,rahulshettyacademy,learn
+                ,rahul,learning
+
+        Just leave the Test case name empty by giving the coma ","
+
+    Point 2:
+        If we don't provide Test case name in CSV, Then that empty place will be taken care by this line.
+        Login with username ${username} and password ${password}
+
+        So, directly username and password will be fetched to that line.
+
+        Similarly, when system unable to connect with csv file it will use default data that we provide.
+        Login with username ${username} and password ${password}    varun       12345
+

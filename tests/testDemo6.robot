@@ -1,8 +1,8 @@
-#This file is the optimised version of testDemo1.robot file
 
 *** Settings ***
 Documentation            To Validate the Login Page
 Library                  SeleniumLibrary
+Library                  ../customLibraries/Shop.py
 Test Setup               open the browser with mortgage payment url    #Beginning
 Test Teardown            Close Browser Session    #Ending
 Resource                 resource.robot     #give two tabs between "Resource" and "resource.robot"
@@ -23,6 +23,7 @@ Validate Cards Display in Shopping Page
     Fill the login form    ${valid_user_name}    ${valid_password}
     wait until element is loaded    ${Shop_Page_Load}
     Verify the Card Titles in the Shop Page
+    Hello World
     Select the card    ${cardname}
 
 Select the Form and navigate to child window
@@ -60,7 +61,7 @@ Verify the Card Titles in the Shop Page
     IF     ${areEqual} == ${TRUE}
         Log     Lists are Equal
     ELSE
-        Log    List are not matching
+        Log    Lists are not matching
     END
 
 Select the card
@@ -70,7 +71,6 @@ Select the card
     FOR    ${element}    IN    @{elements}
         Exit For Loop If    '${element.text}' == '${cardname}'    #quotes are from syntax
         ${index} =    Evaluate    ${index} + 1    #We need to add Evaluate Keyword, For every steps or line there should be one Keyword in Robot Framework
-            END
     END
     Click Button    xpath:(//button[@class='btn btn-info'])[${index}]
     Log     ${element.text}

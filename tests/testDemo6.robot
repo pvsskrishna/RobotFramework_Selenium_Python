@@ -12,6 +12,7 @@ ${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]
 ${Shop_Page_Load}          css:a[class='nav-link']
 ${Card_Titles}             css:h4[class='card-title']
 ${cardname}                Blackberry
+@{list_of_products}        Blackberry    Nokia Edge
 
 *** Test Cases ***
 Validate UnSuccessful Login
@@ -24,7 +25,8 @@ Validate Cards Display in Shopping Page
     wait until element is loaded    ${Shop_Page_Load}
     Verify the Card Titles in the Shop Page
     Hello World
-    Select the card    ${cardname}
+    Add Items To Cart And Checkout    @{list_of_products}
+    #Select the card    ${cardname}
 
 Select the Form and navigate to child window
     Fill the Login Details and Login Form

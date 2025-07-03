@@ -7,7 +7,7 @@ Documentation   A resource file with reusable keywords and variables     #we use
 Library         SeleniumLibrary
 Library         Collections
 Library         String
-Library         DataDriver
+#Library         DataDriver
 #Library         RPA.Browser.Selenium    auto_close=${FALSE}
 
 
@@ -30,3 +30,10 @@ open the browser with mortgage payment url
 
 Close Browser Session
     Close Browser
+
+handle chrome password manager popup
+    [Documentation]    Handles Chrome 'Change Password' alert popup if present
+    Run Keyword And Ignore Error
+    ...    Wait Until Element Is Visible    xpath=//button[text()='OK']    3s
+    Run Keyword And Ignore Error
+    ...    Click Button    xpath=//button[text()='OK']

@@ -114,13 +114,11 @@ Ans:
             For that there is one built in method in robot framework, here where we can write that (inside constructor).
             BuiltIn()
 
-            so from now on we can use all builtin keywords of robot framework using "BuiltIn()" method.
+            so from now on we can use all builtin keywords of robot framework using "BuiltIn()" class.
             Now, using this we can get the Selenium Instance Library
 
-            BuiltIn().get_library_instance
+            BuiltIn().get_library_instance("Seleniumlibrary")   
+                ---> For ex if we want collections instance we provide the "Collections" library name.
 
-
-
-
-
+            Hover the mouse on the red line import the "BuiltIn" package ---> from robot.libraries.BuiltIn import BuiltIn
 

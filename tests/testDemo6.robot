@@ -22,10 +22,11 @@ Validate UnSuccessful Login
 
 Validate Cards Display in Shopping Page
     Fill the login form    ${valid_user_name}    ${valid_password}
+    handle chrome password manager popup
     wait until element is loaded    ${Shop_Page_Load}
     Verify the Card Titles in the Shop Page
     Hello World
-    Add Items To Cart And Checkout    @{list_of_products}
+    Add Items To Cart And Checkout    ${list_of_products}
     #Select the card    ${cardname}
 
 Select the Form and navigate to child window

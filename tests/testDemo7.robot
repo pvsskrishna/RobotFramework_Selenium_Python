@@ -5,23 +5,26 @@ Library                  SeleniumLibrary
 Library                  ../customLibraries/Shop.py
 Test Setup               open the browser with mortgage payment url    #Beginning
 Test Teardown            Close Browser Session    #Ending
-Resource                 ../PO/Generic.robot     #give two tabs between "Resource" and "resource.robot"
+Resource                 ../PO/Generic.robot
+Resource                 ../PO/LandingPage.robot
+Resource                 ../PO/ShopPage.robot
+
 
 *** Variables ***
-${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]
 ${Shop_Page_Load}          css:a[class='nav-link']
 ${Card_Titles}             css:h4[class='card-title']
 ${cardname}                Blackberry
 @{list_of_products}        Blackberry    Nokia Edge
 
+
 *** Test Cases ***
 Validate UnSuccessful Login
-    Fill the login form    ${valid_user_name}    ${invalid_password}
-    wait until element is loaded    ${Error_Message_Login}
+    LandingPage.Fill the login form    ${valid_user_name}    ${invalid_password}
+    ShopPage.wait until element is loaded
     verify the error message is correct
 
 Validate Cards Display in Shopping Page
-    Fill the login form    ${valid_user_name}    ${valid_password}
+    LandingPage.Fill the login form    ${valid_user_name}    ${valid_password}
     handle chrome password manager popup
     wait until element is loaded    ${Shop_Page_Load}
     Verify the Card Titles in the Shop Page
@@ -34,16 +37,6 @@ Select the Form and navigate to child window
 
 
 *** Keywords ***
-Fill the login form
-    [Arguments]       ${username}     ${password}
-    Input Text        css:input[name='username']     ${username}        Clear Element Text
-    Input Password    css:input[name='password']     ${password}        Clear Element Text
-    Click Button      id:signInBtn
-
-wait until element is loaded
-    [Arguments]    ${element}
-    Wait Until Element Is Visible    ${element}
-
 verify the error message is correct
     Comment    ${result} =    Get Text    ${Error_Message_Login}
     Comment    Should Be Equal As Strings    ${result}    Incorrect username/password.    #Syntax: Should Be Equal As Strings <1Tab> String1 <1Tab> String2 --> compare two strings

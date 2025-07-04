@@ -11,3 +11,5 @@ tests/log.html
 *.jpg
 *.jpeg
 
+#Ignore the .vscode folder
+.vscode/

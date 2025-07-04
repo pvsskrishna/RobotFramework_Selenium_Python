@@ -1,0 +1,3 @@
+NOTE: 
+   1. resource.robot renamed as  "Generic.robot"
+   2. Moving Generic.robot file to PO folder to maintain all resources in single folder.

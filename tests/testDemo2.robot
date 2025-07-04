@@ -5,7 +5,7 @@ Documentation            To Validate the Login Page
 Library                  SeleniumLibrary
 Test Setup               open the browser with mortgage payment url    #Beginning
 Test Teardown            Close Browser Session    #Ending
-Resource                 resource.robot     #give two tabs between "Resource" and "resource.robot"
+Resource                 ../PO/Generic.robot     #give two tabs between "Resource" and "resource.robot"
 
 *** Variables ***
 ${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]

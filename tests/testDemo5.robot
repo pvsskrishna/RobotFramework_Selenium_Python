@@ -5,7 +5,7 @@ Library            SeleniumLibrary
 Library            DataDriver  file=../resources/data.csv    encoding=utf_8    dialect=unix
 Test Setup         open the browser with mortgage payment url
 Test Teardown      Close Browser
-Resource           resource.robot
+Resource           ../PO/Generic.robot
 Test Template      Validate UnSuccessful Login
 
 *** Variables ***

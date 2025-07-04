@@ -1,0 +1,89 @@
+For example if we take the previous example:
+
+Validate Cards display in the Shopping Page
+    Fill the login form    ${valid_user_name}    ${valid_password} --------> Page 1
+    handle chrome password manager popup                           --------> Page 2
+    wait until element is loaded    ${Shop_Page_Load}              --------> Page 3
+    Verify the Card Titles in the Shop Page
+    Hello World
+    Add Items To Cart And Checkout    ${list_of_products}          --------> Page 4
+
+These all are from different pages.
+
+Q. What does Page Object Mechanism Tells us?
+    Now you see.
+        wait until element is loaded
+        verify the error message is correct
+        Verify the Card Titles in the Shop Page
+        Fill the Login Details and Login Form etc....
+
+    These all are related to different pages but we are writing on the same file.
+    lets say, another test case want to reuse the keyword present in this file. what I have to do?
+
+    But we have already seen one reusable file called "resource.robot" file.
+    where we can declare the reusable keywords here so that all test cases can reuses by calling this resource in their test class.
+    so, what ever keywords we used in resource we can use in all files by importing in *** Settings ***
+
+    So this is one way and that is most common way.
+    But don't you think "resource.robot" file is over wellmed with a lot of keywords.
+
+    In real time if we are working in a project we will be having lot of pages. and each and every page you will have so many keywords right.
+
+    if we are writing everything in a single file it will be huge and creates a design issues later.
+    if something changes whole file can get messedup.
+    So, Instead what we can do, we can break this resource based upon the pages.
+
+
+Steps to create the Page Object Model:
+---------------------------------------
+
+step 1:
+    Create one folder with any name, I preferred "PO" under the main folder - Just like tests folder.
+    under that PO folder, we can create page robot files
+        Ex: LandingPage.robot
+
+        So, this file LandingPage.robot is just like another resource file.
+        where we dont write the *** Test Cases ***
+
+Step 2:
+    copy the *** Settings *** from resource.robot and past it in that LandingPage.robot 
+        [ Observe the testDemo7.robot and LandingPage.robot file ]
+
+
+Step 3:
+    In LandingPage.robot file configure both *** Settings ***, *** keywords *** sections.
+    under *** keywords *** configure keywords related to Landing page.
+
+    Ex:
+        *** Keywords ***
+        Fill the login form
+            [Arguments]       ${username}     ${password}
+            Input Text        css:input[name='username']     ${username}        Clear Element Text
+            Input Password    css:input[name='password']     ${password}        Clear Element Text
+            Click Button      id:signInBtn
+
+Step 4:
+    In testDemo7.robot file 
+        1. import the Resource LandingPage.robot
+        2. remove the keyword from *** Keywords ***  ---> since we placed that in LandingPage.robot file
+        3. in testcases write the keywords as "resource_file_name.Keyword_name"
+
+        Ex:
+            *** Settings ***
+            Resource    LandingPage.robot
+
+            *** Test Cases ***
+            Validate UnSuccessful Login
+                LandingPage.Fill the login form    ${valid_user_name}    ${invalid_password}
+                wait until element is loaded    ${Error_Message_Login}
+                verify the error message is correct
+
+    --> we are using the resource_file_name.keyword beacuse if there were multiple resource file exist 
+        with same keyword, RF will get confuse.
+        So, we are stating which keyword to take from which resource file.
+
+
+
+NOTE: 
+   1. Refactoring the resource file as "Generic.robot"
+   2. Moving Generic.robot file to PO folder to maintain all resources in single folder.

@@ -10,8 +10,6 @@ Library         String
 #Library         DataDriver
 #Library         RPA.Browser.Selenium    auto_close=${FALSE}
 
-
-
 *** Variables ***
 ${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]
 ${valid_user_name}         rahulshettyacademy 

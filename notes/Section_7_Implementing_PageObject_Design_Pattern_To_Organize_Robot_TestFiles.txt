@@ -87,3 +87,25 @@ Step 4:
 NOTE: 
    1. Refactoring the resource file as "Generic.robot"
    2. Moving Generic.robot file to PO folder to maintain all resources in single folder.
+
+So, Just like hwo we are creating new robot file under the PO folder
+we have to create a new python file under custom libraries if in case that page need any custome keywords
+
+Ex: for Shop page how we created Shop.py custom library similarly we can create for other pages too.
+
+
+Suit Setup:
+-----------
+Just like Test Setup and Test Teardown - there is one more Setup in *** Setting *** called Suit Setup.
+Generally, in RF each and every test.robot file is considered as a "Test Suit".
+Inside this every Test Suit we have different *** Test Cases ***
+
+So if we write any test case for Suit Setup - That test case will execute very first before executing all test cases.
+
+Similarly, there is one more setup under *** Settings *** i.e "Suit TearDown"
+
+Suit TearDown:
+--------------
+Basically this opposite of Suit Setup - Just like Test TearDown.
+The test Case given for this Suit TearDown will execute at very last.
+Here we can write for example clear all cookies, clear all session or what ever we want.

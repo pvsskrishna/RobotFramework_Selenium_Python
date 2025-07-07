@@ -35,3 +35,7 @@ handle chrome password manager popup
     ...    Wait Until Element Is Visible    xpath=//button[text()='OK']    3s
     Run Keyword And Ignore Error
     ...    Click Button    xpath=//button[text()='OK']
+
+Wait until element passed is located on page
+    [Arguments]    ${Page_locator}
+    Wait Until Element Is Visible    ${Page_locator}

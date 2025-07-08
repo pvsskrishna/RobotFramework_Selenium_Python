@@ -41,8 +41,28 @@ class Shop:
 
 
         index = 1
-        productTitles = self.selLib.get_webelements("css:h4[class='card-title']")
-        for productTitle in productTitles:
+        producttitles = self.selLib.get_webelements("css:h4[class='card-title']")
+        for productTitle in producttitles:
             if productTitle.text in productsList:
                 self.selLib.click_element("xpath:(//button[@class='btn btn-info'])["+str(index)+"]")
             index += 1
+        self.selLib.click_link("css:li.active a.nav-link.btn.btn-primary")
+
+    @keyword
+    def verify_items_in_checkout_page_and_proceed(self,productsList):
+        rows = self.selLib.get_webelements("xpath://tr")
+        total_rows = len(rows)
+
+        items_in_checkout_page = []
+        for item_no in range(1,total_rows-2):
+            item = self.selLib.find_element(f"xpath:(//tr[{item_no}]/td[1]/div/div/h4/a)").text()
+            items_in_checkout_page.append(item)
+
+        print(f"Actual items in checkout page: {items_in_checkout_page}")
+        print(f"Expected items :{productsList}")
+
+
+        if productsList == items_in_checkout_page:
+            print("Same Items Exist")
+        else:
+            raise AssertionError("Items in checkout page do not match expected product list.")

@@ -27,8 +27,10 @@ Validate Cards Display in Shopping Page
     handle chrome password manager popup
     ShopPage.wait until element is loaded
     ShopPage.Verify the Card Titles in the Shop Page
-    Add Items To Cart And Checkout    ${list_of_products}
-    #ShopPage.Select the card    Blackberry
+    Add Items To Cart And Checkout   ${list_of_products}
+    Verify Items In Checkout Page And Proceed    ${list_of_products}
+    
+    
 
 Select the Form and navigate to child window
     LandingPage.Fill the Login Details and Login Form

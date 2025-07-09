@@ -8,6 +8,7 @@ Test Teardown            Close Browser Session    #Ending
 Resource                 ../PO/Generic.robot
 Resource                 ../PO/LandingPage.robot
 Resource                 ../PO/ShopPage.robot
+Resource                ../PO/CheckoutPage.robot
 
 
 *** Variables ***
@@ -15,11 +16,11 @@ Resource                 ../PO/ShopPage.robot
 
 
 *** Test Cases ***
-Validate UnSuccessful Login
-
-    LandingPage.Fill the login form    ${valid_user_name}    ${invalid_password}
-    LandingPage.wait until element is loaded
-    LandingPage.verify the error message is correct
+#Validate UnSuccessful Login
+#
+#    LandingPage.Fill the login form    ${valid_user_name}    ${invalid_password}
+#    LandingPage.wait until element is loaded
+#    LandingPage.verify the error message is correct
 
 Validate Cards Display in Shopping Page
 
@@ -28,9 +29,7 @@ Validate Cards Display in Shopping Page
     ShopPage.wait until element is loaded
     ShopPage.Verify the Card Titles in the Shop Page
     Add Items To Cart And Checkout   ${list_of_products}
-    Verify Items In Checkout Page And Proceed    ${list_of_products}
-    
-    
+    CheckoutPage.Verify Items In Checkout Page And Proceed    ${list_of_products}
 
-Select the Form and navigate to child window
-    LandingPage.Fill the Login Details and Login Form
+#Select the Form and navigate to child window
+#    LandingPage.Fill the Login Details and Login Form

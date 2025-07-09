@@ -61,8 +61,8 @@ class Shop:
         print(f"Actual items in checkout page: {items_in_checkout_page}")
         print(f"Expected items :{productsList}")
 
-
         if productsList == items_in_checkout_page:
             print("Same Items Exist")
+            self.selLib.click_element("xpath://button[@class='btn btn-success']")
         else:
             raise AssertionError("Items in checkout page do not match expected product list.")

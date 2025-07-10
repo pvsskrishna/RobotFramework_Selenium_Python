@@ -8,12 +8,13 @@ Test Teardown            Close Browser Session    #Ending
 Resource                 ../PO/Generic.robot
 Resource                 ../PO/LandingPage.robot
 Resource                 ../PO/ShopPage.robot
-Resource                ../PO/CheckoutPage.robot
+Resource                 ../PO/CheckoutPage.robot
+Resource                 ../PO/ConfirmationPage.robot
 
 
 *** Variables ***
 @{list_of_products}        Blackberry    Nokia Edge
-
+${country_name}            ind
 
 *** Test Cases ***
 #Validate UnSuccessful Login
@@ -30,6 +31,8 @@ Validate Cards Display in Shopping Page
     ShopPage.Verify the Card Titles in the Shop Page
     Add Items To Cart And Checkout   ${list_of_products}
     CheckoutPage.Verify Items In Checkout Page And Proceed    ${list_of_products}
+    ConfirmationPage.Enter The Country And Select Terms    ${country_name}
+    ConfirmationPage.Purchase The Product And Confirm The Message
 
 #Select the Form and navigate to child window
 #    LandingPage.Fill the Login Details and Login Form

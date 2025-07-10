@@ -2,33 +2,46 @@
 Differences:
 ------------------------------------------------------------------------------------------------------------------------
 Q1. Difference between Set Variable and Get Variable Key word?
-    ### 🔁 Set Variable vs Get Variable – Explained
+        ### 🔁 Set Variable vs Get Variable – Explained
 
-| Feature            | `Set Variable`                                 | `Get Variable`                                 |
-|--------------------|------------------------------------------------|------------------------------------------------|
-| 📌 Purpose         | Assign a new value to a variable               | Retrieve the value of an existing variable     |
-| ⛏️ Main Use        | Define or overwrite a variable inline          | Access value when name is dynamic or stored    |
-| 🎯 Syntax          | `Set Variable    value`                        | `Get Variable    ${variable_name}`             |
-| 🧠 Result Stored In| A new `${}` variable                           | Also returns value into a `${}` variable       |
+    | Feature            | `Set Variable`                                 | `Get Variable`                                 |
+    |--------------------|------------------------------------------------|------------------------------------------------|
+    | 📌 Purpose         | Assign a new value to a variable               | Retrieve the value of an existing variable     |
+    | ⛏️ Main Use        | Define or overwrite a variable inline          | Access value when name is dynamic or stored    |
+    | 🎯 Syntax          | `Set Variable    value`                        | `Get Variable    ${variable_name}`             |
+    | 🧠 Result Stored In| A new `${}` variable                           | Also returns value into a `${}` variable       |
 
 Q2. Difference between Insert To List and Append To List?
 
-| Feature            | `Insert To List`                                           | `Append To List`                              |
-|--------------------|------------------------------------------------------------|------------------------------------------------|
-| 📌 Purpose         | Insert an item at a **specific index** in the list         | Add an item to the **end** of the list         |
-| 📍 Position        | You specify the index (e.g., 0 for beginning)              | Always added to the last position              |
-| 🎯 Syntax          | `Insert To List    ${list}    index    value`             | `Append To List    ${list}    value`           |
-| 🧱 Use Case        | When order matters (e.g., inserting at start or middle)   | When order doesn't matter or collecting items  |
-| 🧠 Result Stored In| Modifies the existing list in-place                        | Modifies the existing list in-place            |
+    | Feature            | `Insert To List`                                           | `Append To List`                              |
+    |--------------------|------------------------------------------------------------|------------------------------------------------|
+    | 📌 Purpose         | Insert an item at a **specific index** in the list         | Add an item to the **end** of the list         |
+    | 📍 Position        | You specify the index (e.g., 0 for beginning)              | Always added to the last position              |
+    | 🎯 Syntax          | `Insert To List    ${list}    index    value`             | `Append To List    ${list}    value`           |
+    | 🧱 Use Case        | When order matters (e.g., inserting at start or middle)   | When order doesn't matter or collecting items  |
+    | 🧠 Result Stored In| Modifies the existing list in-place                        | Modifies the existing list in-place            |
 
 Q3. Difference between Set Global Variable and Set Test Variable?
-### 🌍 Set Global Variable vs Set Test Variable – Explained
+    ### 🌍 Set Global Variable vs Set Test Variable – Explained
 
-| Feature            | `Set Global Variable`                                         | `Set Test Variable`                                      |
-|--------------------|-----------------------------------------------------------    |-----------------------------------------------------------|
-| 📌 Purpose         | Makes a variable available **across all test cases & suites** | Makes a variable available **only within the current test case** |
-| 🌐 Scope           | Global (visible in all tests and keywords)                    | Test-level (visible only in the current test case)         |
-| 🎯 Syntax          | `Set Global Variable    ${variable}`                          | `Set Test Variable    ${variable}`                         |
-| 🔁 Lifetime        | Until the execution ends                                      | Ends after the test case finishes                          |
-| 🧠 Common Use Case | Share login/session data across tests                         | Store temporary values for a single test                   |
+    | Feature            | `Set Global Variable`                                         | `Set Test Variable`                                      |
+    |--------------------|-----------------------------------------------------------    |-----------------------------------------------------------|
+    | 📌 Purpose         | Makes a variable available **across all test cases & suites** | Makes a variable available **only within the current test case** |
+    | 🌐 Scope           | Global (visible in all tests and keywords)                    | Test-level (visible only in the current test case)         |
+    | 🎯 Syntax          | `Set Global Variable    ${variable}`                          | `Set Test Variable    ${variable}`                         |
+    | 🔁 Lifetime        | Until the execution ends                                      | Ends after the test case finishes                          |
+    | 🧠 Common Use Case | Share login/session data across tests                         | Store temporary values for a single test                   |
 
+Q4. Difference between the Get Text, Text Should Contain and Page Should Contain Keywords?
+      Difference between Get Text, Text Should Contain, and Page Should Contain
+
+    | Keyword                 | Purpose                                               | Works On             | Return / Assertion             | Example Usage                                                 |
+    |------------------------|-------------------------------------------------------|-----------------------|-------------------------------|---------------------------------------------------------------|
+    | Get Text               | 🔹 Extracts visible text from a specific element       | Specific element      | ✅ Returns text (string)       | ${msg}=    Get Text    xpath://div[@id="alert"]               |
+    | Text Should Contain    | 🔹 Asserts an element contains expected text          | Specific element      | ❌ Assertion if not matched    | Text Should Contain    xpath://p[@id="status"]    Success     |
+    | Page Should Contain    | 🔹 Asserts that text exists anywhere on the page      | Entire page content   | ❌ Assertion if not found      | Page Should Contain    Welcome to Robot Framework!            |
+
+    *** Summary:
+    - Use `Get Text` when you want to store or log element text.
+    - Use `Text Should Contain` when validating text of a specific element.
+    - Use `Page Should Contain` when validating text anywhere in the page.

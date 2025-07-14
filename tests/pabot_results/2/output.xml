@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3 (Python 3.13.2 on win32)" generated="2025-07-14T10:09:28.656647" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\varun\PycharmProjects\RobotFramework\tests">
+<suite id="s1-s1" name="testDemo3" source="C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo3.robot">
+<test id="s1-s1-t1" name="Validate Child Window Functionality" line="14">
+<kw name="open the browser with mortgage payment url" owner="Generic" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-07-14T10:09:29.149415" level="INFO">Opening browser 'chrome' to base url 'https://rahulshettyacademy.com/loginpagePractise/'.</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<arg>options=add_experimental_option("detach", True)</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-07-14T10:09:29.148916" elapsed="8.393764"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-07-14T10:09:37.543239" elapsed="0.802306"/>
+</kw>
+<status status="PASS" start="2025-07-14T10:09:29.147525" elapsed="9.198408"/>
+</kw>
+<kw name="Click the link of Child Window">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-07-14T10:09:38.348216" level="INFO">Clicking element '//a[contains(text(),'Free Access to')]'.</msg>
+<arg>${child_Window}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-14T10:09:38.347203" elapsed="6.946947"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-14T10:09:50.302665" level="INFO">Slept 5 seconds.</msg>
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-14T10:09:45.294667" elapsed="5.008866"/>
+</kw>
+<status status="PASS" start="2025-07-14T10:09:38.346412" elapsed="11.957543"/>
+</kw>
+<kw name="Verify the user is Switched to Child Window">
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>NEW</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="PASS" start="2025-07-14T10:09:50.305284" elapsed="1.066385"/>
+</kw>
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>documents-request</arg>
+<arg>timeout=15s</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2025-07-14T10:09:51.372153" elapsed="0.033473"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2025-07-14T10:09:51.406691" level="INFO">Verifying element 'css:h2' contains exact text 'DOCUMENTS REQUEST'.</msg>
+<msg time="2025-07-14T10:09:51.858455" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-07-14T10:09:51.858809" level="FAIL">The text of element 'css:h2' should have been 'DOCUMENTS REQUEST' but it was 'JOIN OUR ACADEMY'.</msg>
+<arg>css:h2</arg>
+<arg>${Child_Window_Text}</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="FAIL" start="2025-07-14T10:09:51.406003" elapsed="0.460067">The text of element 'css:h2' should have been 'DOCUMENTS REQUEST' but it was 'JOIN OUR ACADEMY'.</status>
+</kw>
+<status status="FAIL" start="2025-07-14T10:09:50.304466" elapsed="1.562782">The text of element 'css:h2' should have been 'DOCUMENTS REQUEST' but it was 'JOIN OUR ACADEMY'.</status>
+</kw>
+<kw name="Grab the Email id present in the child window">
+<status status="NOT RUN" start="2025-07-14T10:09:51.867859" elapsed="0.000239"/>
+</kw>
+<kw name="Switch back to the Parent window and enter the Email Id">
+<status status="NOT RUN" start="2025-07-14T10:09:51.868516" elapsed="0.000224"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-14T10:09:51.869297" elapsed="3.459823"/>
+</kw>
+<status status="FAIL" start="2025-07-14T10:09:29.146400" elapsed="26.182987">The text of element 'css:h2' should have been 'DOCUMENTS REQUEST' but it was 'JOIN OUR ACADEMY'.</status>
+</test>
+<doc>To Validate the Login Page</doc>
+<status status="FAIL" start="2025-07-14T10:09:28.714120" elapsed="26.619038"/>
+</suite>
+<status status="FAIL" start="2025-07-14T10:09:28.688392" elapsed="26.646615"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="0" fail="1" skip="0">Tests</stat>
+<stat name="testDemo3" id="s1-s1" pass="0" fail="1" skip="0">Tests.testDemo3</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

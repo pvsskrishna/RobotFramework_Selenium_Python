@@ -1,0 +1,28 @@
+==============================================================================
+Tests                                                                         
+==============================================================================
+Tests.testDemo3 :: To Validate the Login Page                                 
+==============================================================================
+Validate Child Window Functionality                                     
+  Traceback (most recent call last):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo3.robot:14
+    T:  Validate Child Window Functionality    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo3.robot:16
+      Verify the user is Switched to Child Window    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo3.robot:28
+      Element Text Should Be    css:h2    ${Child_Window_Text}
+      |  ${Child_Window_Text} = DOCUMENTS REQUEST (str)
+______________________________________________________________________________
+| FAIL |
+The text of element 'css:h2' should have been 'DOCUMENTS REQUEST' but it was 'JOIN OUR ACADEMY'.
+------------------------------------------------------------------------------
+Tests.testDemo3 :: To Validate the Login Page                         | FAIL |
+1 test, 0 passed, 1 failed
+==============================================================================
+Tests                                                                 | FAIL |
+1 test, 0 passed, 1 failed
+==============================================================================
+Output:  C:\Users\varun\PycharmProjects\RobotFramework\tests\pabot_results\2\output.xml

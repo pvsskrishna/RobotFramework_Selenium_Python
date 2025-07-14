@@ -1,0 +1,28 @@
+==============================================================================
+Tests                                                                         
+==============================================================================
+Tests.testDemo1 :: To Validate the Login Page                                 
+==============================================================================
+Validate UnSuccessful Login                                             
+  Traceback (most recent call last):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo1.robot:16
+    T:  Validate UnSuccessful Login    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo1.robot:20
+      verify the error message is correct    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo1.robot:39
+      Element Text Should Be    ${Error_Message_Login}    Incorrect username/password.
+      |  ${Error_Message_Login} = css:div[class="alert alert-danger col-md-12"] (str)
+______________________________________________________________________________
+| FAIL |
+The text of element 'css:div[class="alert alert-danger col-md-12"]' should have been 'Incorrect username/password.' but it was ''.
+------------------------------------------------------------------------------
+Tests.testDemo1 :: To Validate the Login Page                         | FAIL |
+1 test, 0 passed, 1 failed
+==============================================================================
+Tests                                                                 | FAIL |
+1 test, 0 passed, 1 failed
+==============================================================================
+Output:  C:\Users\varun\PycharmProjects\RobotFramework\tests\pabot_results\0\output.xml

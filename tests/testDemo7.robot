@@ -23,10 +23,13 @@ ${country_name}            ind
 #    LandingPage.wait until element is loaded
 #    LandingPage.verify the error message is correct
 
-Validate Cards Display in Shopping Page
+#Validate Cards Display in Shopping Page
+End to End Ecommerce Product Validation
 
     LandingPage.Fill the login form    ${valid_user_name}    ${valid_password}
+    Sleep    3s
     handle chrome password manager popup
+    Sleep    3s
     ShopPage.wait until element is loaded
     ShopPage.Verify the Card Titles in the Shop Page
     Add Items To Cart And Checkout   ${list_of_products}

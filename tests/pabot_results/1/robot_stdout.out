@@ -1,0 +1,32 @@
+==============================================================================
+Tests                                                                         
+==============================================================================
+Tests.testDemo2 :: To Validate the Login Page                                 
+==============================================================================
+Validate UnSuccessful Login                                           | PASS |
+------------------------------------------------------------------------------
+Validate Cards Display in Shopping Page                                 
+  Traceback (most recent call last):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo2.robot:22
+    T:  Validate Cards Display in Shopping Page    
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo2.robot:26
+      Select the card    ${cardname}
+      |  ${cardname} = Blackberry (str)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    File  C:\Users\varun\PycharmProjects\RobotFramework\tests\testDemo2.robot:74
+          
+______________________________________________________________________________
+| FAIL |
+END is not allowed in this context.
+------------------------------------------------------------------------------
+Select the Form and navigate to child window                          | PASS |
+------------------------------------------------------------------------------
+Tests.testDemo2 :: To Validate the Login Page                         | FAIL |
+3 tests, 2 passed, 1 failed
+==============================================================================
+Tests                                                                 | FAIL |
+3 tests, 2 passed, 1 failed
+==============================================================================
+Output:  C:\Users\varun\PycharmProjects\RobotFramework\tests\pabot_results\1\output.xml

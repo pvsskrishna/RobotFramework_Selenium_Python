@@ -15,5 +15,7 @@ tests/log.html
 .vscode/
 
 # Ignore all geckodriver logs
-tests/pabot_results/geckodriver-*.log
+tests/pabot_results/
+test/.pabotsuitenames
+tests/geckodriver-*.log
 

@@ -19,11 +19,20 @@ ${invalid_password}        123456789
 ${url}                     https://rahulshettyacademy.com/loginpagePractise/
 
 *** Keywords ***
+#
+#open the browser with mortgage payment url
+#    Open Browser     ${URL}         chrome         options=add_experimental_option("detach", True)
+##    Create Webdriver            Chrome
+##    Go To                       ${url}
+#    Maximize Browser Window
 
-open the browser with mortgage payment url
-    Open Browser     ${URL}         chrome         options=add_experimental_option("detach", True)
-#    Create Webdriver            Chrome
-#    Go To                       ${url}
+Open the browser with the url
+    [Arguments]    ${browser_name}
+    ${driver_path}    Set Variable If    
+    ...    '${browser_name}'=='chrome'     ../resources/chromedriver.exe
+    ...    '${browser_name}'=='firefox'    ../resources/geckodriver.exe
+    ...    '${browser_name}'=='edge'       ../resources/msedgedriver.exe
+    Open Browser    ${url}    ${browser_name}    executable_path=${driver_path} 
     Maximize Browser Window
 
 Close Browser Session

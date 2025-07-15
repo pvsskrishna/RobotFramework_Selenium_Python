@@ -3,9 +3,11 @@
 *** Settings ***
 Documentation            To Validate the Login Page
 Library                  SeleniumLibrary
-Test Setup               open the browser with mortgage payment url    #Beginning
+#Test Setup               open the browser with mortgage payment url    #Beginning
+Test Setup               Open the browser with the url    Firefox    #Beginning
 Test Teardown            Close Browser Session    #Ending
 Resource                 ../PO/Generic.robot     #give two tabs between "Resource" and "resource.robot"
+
 
 *** Variables ***
 ${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]
@@ -70,7 +72,7 @@ Select the card
     FOR    ${element}    IN    @{elements}
         Exit For Loop If    '${element.text}' == '${cardname}'    #quotes are from syntax
         ${index} =    Evaluate    ${index} + 1    #We need to add Evaluate Keyword, For every steps or line there should be one Keyword in Robot Framework
-            END
+
     END
     Click Button    xpath:(//button[@class='btn btn-info'])[${index}]
     Log     ${element.text}

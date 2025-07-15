@@ -13,3 +13,7 @@ tests/log.html
 
 #Ignore the .vscode folder
 .vscode/
+
+# Ignore all geckodriver logs
+tests/pabot_results/geckodriver-*.log
+

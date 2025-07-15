@@ -14,12 +14,28 @@ Q. How to run the tests parallel?
 Ans:
     There is one plugin PABOT
 
+    Pabot:
+    ------
+    Source: https://github.com/mkorpela/pabot/
+
     It is a Parallel executor for Robot Framework test. with Pabot we can split one execution into multiple and save test execution time.
     - we can trigger all test files at a time in a test folder or
     - we can tigger all test cases present inside a single test file.(one single file)
 
-    By using the below comand we can execute the test files parallely
+    Basic use:
+    ----------
+    Split execution to suite files.
+        Syntax:    pabot [path to tests]
+        Ex: pabot C:\Users\varun\PycharmProjects\RobotFramework\tests
+
+    Split execution on test level.
+        Syntax:    pabot --testlevelsplit [path to tests]
+        Ex: pabot --testlevelsplit testDemo7.robot
+
+    Run same tests with two different configurations.
+        Syntax:    pabot --argumentfile1 first.args --argumentfile2 second.args [path to tests]
+
+    By using the below command we can execute the test files parallely
         pabot .
 
-    By using the below command we can execute the test cases parallely present in a single test file.
 

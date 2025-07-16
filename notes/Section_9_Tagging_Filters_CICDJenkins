@@ -1,0 +1,58 @@
+Robot Framework Command Line Scenarios:
+|---------------------------------------------------------------------------------------------------------|
+| Command Line Scenario                       | Command                                                   |
+|---------------------------------------------|-----------------------------------------------------------|
+| Execute all tests in the folder             | robot .                                                   |
+| Execute a specific test file                | robot <testfilename>.robot                                |
+| Execute test cases by test name             | robot -t "<testname>" .                                   |
+| Execute test cases by tag                   | robot --include <tagname> .                               |
+| Execute test cases by multiple tags (AND)   | robot --include tag1ANDtag2 .                             |
+| Execute test cases by multiple tags (OR)    | robot --include tag1ORtag2 .                              |
+| Exclude tests by tag                        | robot --exclude <tagname> .                               |
+| Execute tests by suite name                 | robot --suite <suitename>                                 |
+| Re-run only failed tests                    | robot --rerunfailed output.xml .                          |
+----------------------------------------------------------------------------------------------------------|
+
+Example:
+|--------------------------------------------------------------------------------------------------------------------|
+| Command Line Scenario                       | Example Command                                                      |
+|---------------------------------------------|----------------------------------------------------------------------|
+| Execute all tests in the folder             | robot .                                                              |
+| Execute a specific test file                | robot loginTests.robot                                               |
+| Execute test cases by test name             | robot -t "Valid Login Test" .                                        |
+| Execute test cases by tag                   | robot --include smoke .                                              |
+| Execute test cases by multiple tags (AND)   | robot --include smokeANDregression .                                 |
+| Execute test cases by multiple tags (OR)    | robot --include smokeORsanity .                                      |
+| Exclude tests by tag                        | robot --exclude skip .                                               |
+| Execute tests by suite name                 | robot --suite loginSuite                                             |
+| Re-run only failed tests                    | robot --rerunfailed output.xml .                                     |
+---------------------------------------------------------------------------------------------------------------------|
+
+Tricks:
+  1. Execute test cases by test name   --->  robot -t "<testname>" .
+
+    In this command line . (dot) referred to search the <testname> in all test files
+    if you want to execute that <testname> in any specific test file we can give that test file name
+
+    Ex: robot -t "Valid Login Test" testDemo2.robot
+
+  2. Execute test cases by test name   --->  robot -t "<testname>" .
+
+    In this command line - we can make use regular expression for the <testname>
+    instead of giving full name we can give partial name by keeping *
+    It will execute all the tests which are starting with testname starting with "Valid" from all test files.
+
+    Ex: robot -t "Valid*" testDemo2.robot .
+
+  3. Execute test cases by tag    ---> robot --include <tagname> .
+
+    we can attach tags to the test cases just like how we are configuring the arguments.
+    Ex:
+        Validate UnSuccessful Login
+            [Tags]      SMOKE                                                   ---> Just like this
+            Fill the login form    ${valid_user_name}    ${invalid_password}
+            wait until element is loaded    ${Error_Message_Login}
+            verify the error message is correct
+
+        So next time we can run the tests based on the tags
+            robot --include SMOKE .

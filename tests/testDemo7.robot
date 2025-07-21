@@ -25,7 +25,7 @@ ${country_name}            ind
 
 #Validate Cards Display in Shopping Page
 End to End Ecommerce Product Validation
-    [Tags]    Regression
+    [Tags]    Regression    SMOKE
     LandingPage.Fill the login form    ${valid_user_name}    ${valid_password}
     Sleep    3s
     handle chrome password manager popup

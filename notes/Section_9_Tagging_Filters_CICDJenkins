@@ -56,3 +56,70 @@ Tricks:
 
         So next time we can run the tests based on the tags
             robot --include SMOKE .
+
+  NOTE: Both OR and AND should be capital in commands.
+
+  4. We can add multiple tags for the test cases by just give tab space and add one more tag
+    ex: End to End Ecommerce Product Validation
+            [Tags]    Regression    SMOKE
+
+            ✅ Tags are case-insensitive: regression, Regression, and REGRESSION are all the same.
+            ❌ --include RegressionORSMOKE won't match Regression or SMOKE unless a tag is literally RegressionORSMOKE.
+            ✅ Use --include "Regression OR SMOKE" to run tests with either tag.
+
+  5. robot --rerunfailed output.xml .
+        Basically this command is used to re-run all the failed testcases.
+
+        🔁 Robot Framework: Rerun Failed Tests
+
+        Command:
+        robot --rerunfailed output.xml .
+
+        📌 Description:
+        This command reruns only the failed test cases from a previous Robot Framework test execution.
+
+        🧩 Breakdown:
+         robot: Runs Robot Framework.
+         --rerunfailed output.xml: Tells Robot to rerun only the tests that failed in the given output.xml file.
+         . : Refers to the current directory (where your test cases are located).
+
+        ✅ Use Case:
+        Useful when you want to save time by rerunning only the failed test cases instead of the full suite.
+
+        🔄 Optional (Merging Results):
+        After rerun, merge the original and rerun results into a final report using:
+        rebot --merge output.xml rerun.xml
+
+        ⚠️ Note:
+        Make sure output.xml exists and is generated from a previous Robot run.
+
+Q. How to set variable values from runtime command-line arguments in Robot Framework❓
+
+    ✅ Use Case:
+        You may want to dynamically decide which browser the test should use at runtime, instead of hardcoding the browser name in your scripts.
+
+    🔸 Scenario:
+        Currently, the browser is hardcoded in the script. Instead, let’s define it as a global variable,
+        so all test cases refer to this single variable (${browser_name}).
+        This way, we can override its value from the command line when needed.
+
+    🔹 Step-by-Step:
+
+        Step 1: Set a default browser in your generic/shared variable file
+            - For example, set:
+                *** Variables ***
+                ${browser_name}    Chrome
+            - Don’t pass browser_name from the command line unless you want to override it.
+            - Update your test cases to use ${browser_name} wherever browser initialization is done.
+
+        Step 2: Override the browser from the command line at runtime
+            If you want to run the tests on a different browser (say Firefox), use:
+                robot --variable browser_name:Firefox testDemo7.robot
+            This will override the default Chrome value and use Firefox instead.
+
+    ℹ️ Notes:
+        - The --variable syntax is:
+            --variable variable_name:value
+        - The variable_name part should match the variable name without the ${}.
+          For example, if your script uses ${browser_name}, then you must pass:
+            --variable browser_name:SomeValue

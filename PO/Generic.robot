@@ -17,22 +17,23 @@ ${invalid_user_name}       varunpaladugula
 ${valid_password}          learning
 ${invalid_password}        123456789
 ${url}                     https://rahulshettyacademy.com/loginpagePractise/
+${browser_name}            Chrome
 
 *** Keywords ***
 
 open the browser with mortgage payment url
-    Open Browser     ${URL}         chrome         options=add_experimental_option("detach", True)
+    Open Browser     ${URL}         ${browser_name}         options=add_experimental_option("detach", True)
 #    Create Webdriver            Chrome
 #    Go To                       ${url}
     Maximize Browser Window
 
 Open the browser with the url
-    [Arguments]    ${browser_name}
+    #[Arguments]    ${browser_name}
     ${driver_path}    Set Variable If
     ...    '${browser_name}'=='chrome'     ../resources/chromedriver.exe
     ...    '${browser_name}'=='firefox'    ../resources/geckodriver.exe
     ...    '${browser_name}'=='edge'       ../resources/msedgedriver.exe
-    Open Browser    ${url}    ${browser_name}    executable_path=${driver_path} 
+    Open Browser    ${url}    ${browser_name}    executable_path=${driver_path}
     Maximize Browser Window
 
 Close Browser Session

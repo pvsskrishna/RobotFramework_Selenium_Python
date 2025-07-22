@@ -25,7 +25,7 @@ Validate Cards Display in Shopping Page
     Fill the login form    ${valid_user_name}    ${valid_password}
     wait until element is loaded    ${Shop_Page_Load}
     Verify the Card Titles in the Shop Page
-    Select the card    ${cardname}
+    Select the card    ${cardname}    
 
 Select the Form and navigate to child window
     Fill the Login Details and Login Form

@@ -123,3 +123,58 @@ Q. How to set variable values from runtime command-line arguments in Robot Frame
         - The variable_name part should match the variable name without the ${}.
           For example, if your script uses ${browser_name}, then you must pass:
             --variable browser_name:SomeValue
+        - The variable should be Global variable i.e it can be in any file but it must be under ***variables***
+
+
+    6. We can pass multiple flags,variables in command line
+        ex:
+            robot --variable browser_name:Firefox --include SMOKE testDemo7.robot
+            robot --variable browser_name:Firefox --include SMOKE -t "Valid Login Test" testDemo7.robot
+
+INTERVIEW QUESTIONS:
+--------------------
+
+    1. How do you set the command line arguments?
+    2. How to return the value from keyword?
+        Ans: ${result} =     Get Text    ${Error_Message_Login}
+    3. How do you share the variables from one keyword to another keyword?
+        Ans:
+        *** Keywords ***
+        Grab the Email id present in the child window                       ---> Keyword 1
+            ${mail_id}=    Get From List    ${2nd_split_list}    0          ---> Variable
+            Log    ${mail_id}
+            Set Global Variable        ${mail_id}                           ---> Making variable global
+
+        Switch back to the Parent window and enter the Email Id             ---> Keyword 2
+            Switch Window    MAIN
+            Title Should Be    LoginPage Practise | Rahul Shetty Academy
+            Input Text        id:username    ${mail_id}    Clear Element Text
+            log     ${mail_id}
+
+        Here ${mail_id} is a variable from 1st keyword but i want to use it in another keyword.
+        for that, we have to made that variable as global variable by using "Global Variable"
+        That make the variable to go into global scope and we access in another keyword
+
+    4. How do yu get your robot framework selenium instance to your custom library python file?
+        Ans: ---> BuiltIn().get_library_instance("Seleniumlibrary")
+            Ex:
+            from robot.libraries.BuiltIn import BuiltIn
+
+            @library
+            class Shop:
+                def __init__(self):
+                    self.selLib = BuiltIn().get_library_instance("Seleniumlibrary")
+
+    5. How do you create custom python keywords ? and deploy that?
+    Ans: Section6 Notes
+        (we need to explain the process that we followed in customLibraries --->Shop.py file)
+
+    6. Questions on Data Driven Testing?
+    7. Parameterization of your test cases?
+    8. How do you set the POM?
+    9. All related questions present in our existing examples?
+    10. How do you set the paths?
+    11. How to test parallel?
+        Ans: tell about pabot library and terminal commands.
+    12. For more interview questions assistance ---> reach out to
+            Framework Interview questions ---> mentor@rahulshettyacademy.com

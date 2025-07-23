@@ -29,6 +29,7 @@ Example:
 ---------------------------------------------------------------------------------------------------------------------|
 
 Tricks:
+-------
   1. Execute test cases by test name   --->  robot -t "<testname>" .
 
     In this command line . (dot) referred to search the <testname> in all test files
@@ -94,7 +95,7 @@ Tricks:
         Make sure output.xml exists and is generated from a previous Robot run.
 
 Q. How to set variable values from runtime command-line arguments in Robot Framework❓
-
+--------------------------------------------------------------------------------------
     ✅ Use Case:
         You may want to dynamically decide which browser the test should use at runtime, instead of hardcoding the browser name in your scripts.
 
@@ -178,3 +179,80 @@ INTERVIEW QUESTIONS:
         Ans: tell about pabot library and terminal commands.
     12. For more interview questions assistance ---> reach out to
             Framework Interview questions ---> mentor@rahulshettyacademy.com
+
+Jenkins:
+--------
+    Installation:
+    --------------
+        1. Go to jenkins Official site - download "Generic Java Package (war)" LTS version.
+            It will be around 89MB
+        2. It will download as jenkins.war file
+        3. Open command prompt - Change the path to where exactly this jenkins.war file is located/downloaded.
+            Basically jenkins is not a tool - its run in our own server(local machine is acts as server).
+        4. in command pmpt start opening this jar or war file with the below command.
+
+            java -jar jenkins.war -httpPort=9090
+
+            basically we are asking java to open the jar/war file if we give like this in the given port 9090.
+        5. If there is an error like this:
+
+            C:\Users\varun\Downloads>java -jar jenkins.war -httpPort=9090
+            'java' is not recognized as an internal or external command,
+             operable program or batch file.
+
+             Then we need to install the java
+
+                1. Go to: https://www.oracle.com/java/technologies/javase-downloads.html
+                2. Download and install the Java SE Development Kit (JDK) – version 11 or higher is fine for Jenkins.
+                3. During installation, note the install location, typically:
+                    C:\Program Files\Java\jdk-XX
+                4. Add Java to PATH
+                    Press Win + S, search for "Environment Variables" and open it.
+                    In System Properties → Advanced → Click Environment Variables.
+                    Under System variables, find and select Path, then click Edit.
+                    Click New, and add this path (adjust based on your JDK version):
+                        C:\Program Files\Java\jdk-XX\bin
+                5. Verify Setup
+                    java -version
+
+                6. Best practice: create jenkins name folder in c drive and move that jenkins.war file into it.
+                7. now use this command from that .war file path in cmd pmpt --->java -jar jenkins.war -httpPort=9090
+                    it will run some logs and generate
+                     An admin user has been created and a password generated.
+                     Please use the following password to proceed to installation:
+
+                     336ebecc7da6459ab6c3b1cda0071eee
+
+                     now Jenkins is fully up and running
+
+        6. Now use this following command in browser
+            http://localhost:8080   (if it is using another port replace with it)
+            we can find in which port jenkins is running in logs generated in cmd pmt during jenkins activation.
+            Ex:
+            2025-07-23 12:11:40.922+0000 [id=1]     INFO    o.e.j.server.AbstractConnector#doStart: Started ServerConnector@5f577419{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+
+        7. Once after opening http://localhost:8080
+            it will ask for administrator password
+            (we can find that in logs produced during jenkins activation in cmd pmt or
+             This may also be found at: C:\Users\varun\.jenkins\secrets\initialAdminPassword )
+
+    Configuration:
+    --------------
+    1. Once installation is done yo will be landed into dashboard where you can see the "New Item" in left menu.
+    2. Give your project name and select Free style and click ok. - The job will be created
+    3. Firstly we have to provide path of our project
+        if our project is in git repo - then we can pass the git repository url. in source code management.
+        or if it is in local - go to General > Advanced
+            check the box for "Use custom workspace" and copy the absolute path of the project folder and past it in directory.
+        Now this jenkin job knows where exactly our project is located.
+    4. Go to Build steps > Add build steps dropdown.
+        select "Execute Windows batch command" ---> for windows user if apple use "Execute Shell"
+        provide the commands that should execute while running the build
+        Ex:
+            cd tests
+            robot --variable browser_name:Firefox --include REGRESSION .
+
+        cd tests ---> will take the jenkins to test folder where our tests were exist and execute the command provided below it.
+    5. Click save, that's it our project is ready in jenkins, we can see our project name in dashboard.
+
+

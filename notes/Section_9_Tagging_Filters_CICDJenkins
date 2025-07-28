@@ -238,7 +238,7 @@ Jenkins:
 
     Configuration:
     --------------
-    1. Once installation is done yo will be landed into dashboard where you can see the "New Item" in left menu.
+    1. Once installation is done you will be landed into dashboard where you can see the "New Item" in left menu.
     2. Give your project name and select Free style and click ok. - The job will be created
     3. Firstly we have to provide path of our project
         if our project is in git repo - then we can pass the git repository url. in source code management.
@@ -246,7 +246,7 @@ Jenkins:
             check the box for "Use custom workspace" and copy the absolute path of the project folder and past it in directory.
         Now this jenkin job knows where exactly our project is located.
     4. Go to Build steps > Add build steps dropdown.
-        select "Execute Windows batch command" ---> for windows user if apple use "Execute Shell"
+        select "Execute Windows batch command" ---> for windows user. if apple, use "Execute Shell"
         provide the commands that should execute while running the build
         Ex:
             cd tests
@@ -254,5 +254,30 @@ Jenkins:
 
         cd tests ---> will take the jenkins to test folder where our tests were exist and execute the command provided below it.
     5. Click save, that's it our project is ready in jenkins, we can see our project name in dashboard.
+
+    But here also we are making few things static like tagname, browser name  ---> to make it dynamic we have to make the "project parametrized".
+
+    6. Go to General tab, check the box "This project is parameterized".
+        Add parameter > choose choice parameter
+        Ex: Name: ---> browserName
+            choices:
+                Chrome
+                Firefox
+                IE
+        so at runtime it will ask to choose the parameters.
+
+    7. Now replace this parameters to make the build dynamic in command
+            cd tests
+            robot --variable browser_name:Firefox --include REGRESSION .
+
+        replacing the browser_name with our parameter name browserName in the format %browserName%
+
+            cd tests
+            robot --variable browserName:%browserName% --include %Tags% testDemo1.robot
+
+        So, at run time based upon the option you select, lets say if we select Chrome, the Chrome value will fall here at %browserName%
+        in that way we are dynamically creating command everytime based upon option selection.
+
+
 
 

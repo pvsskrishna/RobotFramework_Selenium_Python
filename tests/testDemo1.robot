@@ -14,6 +14,7 @@ ${Error_Message_Login}     css:div[class="alert alert-danger col-md-12"]
 #Under  *** Test Cases*** we will write business scenarios.
 *** Test Cases ***
 Validate UnSuccessful Login
+    [Tags]    REGRESSION
     open the browser with mortgage payment url
     Fill the login form
     wait until it checks and displays error message

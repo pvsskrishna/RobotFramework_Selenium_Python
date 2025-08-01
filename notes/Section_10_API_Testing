@@ -1,0 +1,21 @@
+Dictionary:
+----------
+Syntax:
+    &{Dictionary_variable}=      Create Dictionary       key1=value1      key2=value2
+
+    Q.How to check the key exist in dictionary ir not?
+    syntax:
+        Dictionary Should Contain Key   ${Dictionary_variable}  Key1
+
+    Q. How to extract the value of a key? or How to Return a value from the given dictionary based on the given key?
+        there are two ways
+        method1:
+            ${Dictionary_variable}[Key1]
+        method2:
+            ${value} = Get From Dictionary     ${Dictionary}   key
+
+requests library:
+-----------------
+To perform API testing we need a new library - "robotframework-requests"
+
+    To practice api testing we can make use of "rahulshettyacademy.com > Practice > API test automation students > Library API Contract"

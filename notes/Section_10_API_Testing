@@ -26,6 +26,7 @@ To perform API testing we need a new library - "robotframework-requests"
 
         Purpose:
         Sends a POST request to the specified URL.
+        https://marketsquare.github.io/robotframework-requests/doc/RequestsLibrary.html#POST
 
         Arguments:
         -------------------------------------
@@ -93,6 +94,64 @@ To perform API testing we need a new library - "robotframework-requests"
         Ex: Status should be    200     ${response}
 
 
+GET Keyword – Notes
+----------------------------
 
+        Purpose:
+        Sends a GET request to retrieve a resource from a URL.
+        https://marketsquare.github.io/robotframework-requests/doc/RequestsLibrary.html#GET
 
+        Arguments:
+        -------------------------------------
+        url                   ✅ Required
+            - Endpoint to which the GET request is sent.
 
+        params=None          ❌ Optional
+            - Query string parameters.
+            - Can be a string, dict, list of tuples, or bytes.
+
+        expected_status=None ❌ Optional
+            - Expected HTTP status code(s).
+            - Use 'any' to disable automatic status validation.
+
+        msg=None             ❌ Optional
+            - Custom message if the status code check fails.
+
+        **kwargs             ❌ Optional
+            - Additional request options like:
+                - headers
+                - cookies
+                - auth
+                - timeout
+                - proxies
+                - etc.
+
+        Important Notes:
+        ----------------------------
+        - Use `params` to pass query string values in the URL.
+          Example: ?search=robot&sort=asc
+
+        - Use `expected_status='any'` to skip status code validation.
+
+        - `**kwargs` allows passing various extra request parameters like:
+
+            headers         → {"Authorization": "Bearer <token>"}
+            data            → For custom body data (rare in GET).
+            json            → JSON body (unusual for GET).
+            cookies         → Send cookies with the request.
+            files           → For file upload (not common in GET).
+            auth            → For basic or custom auth.
+            timeout         → Wait time before aborting request.
+            allow_redirects → Boolean to follow redirects.
+            proxies         → Use HTTP/HTTPS proxies.
+            verify          → SSL certificate validation (True/False or path).
+            stream          → If False, download response content immediately.
+            cert            → SSL client cert (.pem) or tuple ('cert', 'key').
+
+        Examples:
+        ----------------------------
+        GET  https://api.example.com/products
+
+        GET  https://api.example.com/search
+             params={"q": "shoes", "sort": "price"}
+             headers={"Authorization": "Bearer abc123"}

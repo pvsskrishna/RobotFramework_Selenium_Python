@@ -19,3 +19,80 @@ requests library:
 To perform API testing we need a new library - "robotframework-requests"
 
     To practice api testing we can make use of "rahulshettyacademy.com > Practice > API test automation students > Library API Contract"
+
+
+    POST Keyword – Notes
+    ----------------------------
+
+        Purpose:
+        Sends a POST request to the specified URL.
+
+        Arguments:
+        -------------------------------------
+        url                 ✅ Required
+            - Endpoint to which the POST request is sent.
+
+        data=None          ❌ Optional*
+            - Body data (form-style: dict, bytes, file, etc.).
+
+        json=None          ❌ Optional*
+            - JSON body (pass a dict, auto sets Content-Type).
+
+        expected_status=None ❌ Optional
+            - Expected HTTP status code(s).
+            - Use 'any' to disable automatic status check.
+
+        msg=None           ❌ Optional
+            - Custom failure message if status check fails.
+
+        **kwargs           ❌ Optional
+            - Additional request settings like:
+                - headers={"Authorization": "Bearer <token>"}
+                - timeout=10
+                - verify=False
+
+        Important Notes:
+        ----------------------------
+        - You must provide either `data` or `json` for meaningful POST request.
+        - If neither is provided, the POST request may be valid but not useful.
+        - Use `expected_status='any'` to disable status code validation.
+
+        Examples:
+        ----------------------------
+        POST  https://api.example.com/login  json={"username":"user", "password":"pass"}
+
+        POST  https://api.example.com/upload  data={"file": "example.txt"}
+              headers={"Content-Type":"multipart/form-data"}
+
+        Add Book Into Library Database
+            &{req_body}=    Create Dictionary    name=Robotframework    isbn=1234    aisle=45766    author=varun
+            ${response}=    POST    ${Base_url}/Library/Addbook.php    json=${req_body}    expected_status=200
+            log    ${response.json()}
+
+    Q. How we will check weather the id is generated or not in the response? How do we put validation?
+        Ans: we can use keyword "Dictionary should contain Key"
+
+        log    ${response.json()}
+        Dictionary Should Contain Key     ${response.json()}    ID
+
+    Q. How to get the value present in Key (Ex: id value)?
+    Ans:
+        log    ${response.json()}
+        Dictionary Should Contain Key     ${response.json()}    ID
+        ${book_id}=    Get From Dictionary     ${response.json()}    ID
+        Log    ${book_id}
+
+     Q. How to Verify the message displayed in logs?
+         Ans:   using a keyword "Should be equal as strings"    Expected_string     Actual_string
+         Ex:
+            Log    ${id_value}
+            Should Be Equal As Strings    successfully added    ${response.json()}[Msg]
+
+     Q. How can we check the status of the API explicitly?
+     Ans:   using the keyword "Status should be    code    ${response}"
+        Ex: Status should be    200     ${response}
+
+
+
+
+
